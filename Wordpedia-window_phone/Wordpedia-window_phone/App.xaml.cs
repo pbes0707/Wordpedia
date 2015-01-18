@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
+using Windows.ApplicationModel.Activation;
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=391641
 
@@ -23,6 +24,7 @@ namespace Wordpedia_window_phone
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
+    
     public sealed partial class App : Application
     {
         private TransitionCollection transitions;
@@ -35,8 +37,8 @@ namespace Wordpedia_window_phone
         {
             this.InitializeComponent();
             this.Suspending += this.OnSuspending;
-        }
 
+        }
         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points
         /// will be used when the application is launched to open a specific file, to display
@@ -51,7 +53,6 @@ namespace Wordpedia_window_phone
                 this.DebugSettings.EnableFrameRateCounter = true;
             }
 #endif
-
             Frame rootFrame = Window.Current.Content as Frame;
 
             // Do not repeat app initialization when the Window already has content,

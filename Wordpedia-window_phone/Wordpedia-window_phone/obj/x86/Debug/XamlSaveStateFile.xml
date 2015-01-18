@@ -1,7 +1,9 @@
 <XamlCompilerSaveState>
   <ReferenceAssemblyList>
-    <LocalAssembly PathName="c:\wordpedia\wordpedia-window_phone\wordpedia-window_phone\obj\x86\debug\intermediatexaml\wordpedia-window_phone.exe" HashGuid="4e6e6bc2-7adf-7007-9542-518135f3180f" />
+    <LocalAssembly PathName="c:\wordpedia\wordpedia-window_phone\wordpedia-window_phone\obj\x86\debug\intermediatexaml\wordpedia-window_phone.exe" HashGuid="c026780f-b85d-492b-d99f-c688d2211695" />
     <ReferenceAssembly PathName="c:\program files (x86)\microsoft sdks\windowsphoneapp\v8.1\extensionsdks\microsoft.vclibs\12.0\references\commonconfiguration\neutral\platform.winmd" HashGuid="58b6b6d1-928e-9908-9804-eb460e5e101b" />
+    <ReferenceAssembly PathName="c:\wordpedia\wordpedia-window_phone\packages\microsoft.bcl.async.1.0.168\lib\wpa81\microsoft.threading.tasks.dll" HashGuid="3a1beea5-1547-d5c6-af32-3b5c761c2a6a" />
+    <ReferenceAssembly PathName="c:\wordpedia\wordpedia-window_phone\packages\microsoft.bcl.async.1.0.168\lib\wpa81\microsoft.threading.tasks.extensions.dll" HashGuid="79a01987-c06c-c9d7-37eb-629809787680" />
     <ReferenceAssembly PathName="c:\wordpedia\wordpedia-window_phone\packages\microsoft.windows.ocr.1.0.0\lib\wpa81\x86\windowspreview.media.ocr.winmd" HashGuid="a5310a53-1cc2-dceb-da35-610421ecb7df" />
   </ReferenceAssemblyList>
 </XamlCompilerSaveState>
