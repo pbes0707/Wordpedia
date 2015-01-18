@@ -38,6 +38,9 @@
       <PackagePath>Assets\Logo.scale-240.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\Assets\sample.png">
+      <PackagePath>Assets\sample.png</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\Assets\SmallLogo.scale-240.png">
       <PackagePath>Assets\SmallLogo.scale-240.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>

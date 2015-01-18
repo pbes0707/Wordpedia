@@ -101,7 +101,7 @@ namespace Wordpedia_window_phone
                     int width = (int)props.Width;
                     bitmap = new WriteableBitmap(height, width);
                     bitmap.SetSource(fileStream);
-                    //image.Source = bitmap;
+                    image.Source = bitmap;
                 }
             }
 

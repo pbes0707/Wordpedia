@@ -10,12 +10,12 @@
 
     <Grid>
         <Button x:ConnectionId='1' Content="OCR Test" HorizontalAlignment="Left" Margin="22,571,0,0" VerticalAlignment="Top"                     />
-        <Image x:Name="image" HorizontalAlignment="Left" Height="330.966" Margin="18.357,15.601,0,0" VerticalAlignment="Top" Width="362.786" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Source="Assets/sample.jpg">
+        <Image x:Name="image" HorizontalAlignment="Left" Height="330.966" Margin="18.357,15.601,0,0" VerticalAlignment="Top" Width="362.786" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Source="Assets/sample.png">
             <Image.RenderTransform>
                 <CompositeTransform Rotation="0.061"/>
             </Image.RenderTransform>
         </Image>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="22,377,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="186" Width="354" FontSize="36"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="22,377,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="186" Width="354" FontSize="20"/>
     </Grid>
 </Page>
 
