@@ -13,6 +13,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrlParsing.Windows", "UrlPa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrlParsing.WindowsPhone", "UrlParsing\UrlParsing.WindowsPhone\UrlParsing.WindowsPhone.csproj", "{78B397DD-9F32-44E9-A885-4860980E20AD}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{54ED0CA4-FCD4-4FE2-87EB-8762EC41F76A}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		UrlParsing\UrlParsing.Shared\UrlParsing.Shared.projitems*{18da4871-197d-4a99-a8ef-ab904a3905f8}*SharedItemsImports = 4

@@ -27,8 +27,6 @@
             <SupportedFileTypes>
               <SupportsAnyFileType />
             </SupportedFileTypes>
-            <DataFormat>Text</DataFormat>
-            <DataFormat>HTML</DataFormat>
             <DataFormat>weblink</DataFormat>
           </ShareTarget>
         </Extension>

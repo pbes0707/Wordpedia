@@ -138,17 +138,23 @@ namespace UrlParsing
 
         protected override async void OnShareTargetActivated(ShareTargetActivatedEventArgs args)
         {
-            // Code to handle activation goes here.	
             ShareOperation shareOperation = args.ShareOperation;
             if (shareOperation.Data.Contains(StandardDataFormats.WebLink))
             {
                 Uri uri = await shareOperation.Data.GetWebLinkAsync();
                 if (uri != null)
                 {
-                    
+                    Frame frame = new Frame();
+                    frame.Navigate(typeof(MainPage), uri.AbsoluteUri);
+                    Window.Current.Content = frame;
+                    Window.Current.Activate();
                 }
+            }
 
-                //shareOperation.ReportCompleted();
+            if (shareOperation.Data.Contains(StandardDataFormats.Html))
+            {
+                string htmlFormat = await shareOperation.Data.GetHtmlFormatAsync();
+                string htmlFragment = HtmlFormatHelper.GetStaticFragment(htmlFormat);
             }
         }
     }

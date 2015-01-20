@@ -1,5 +1,7 @@
-﻿using System;
+﻿using HtmlAgilityPack;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -37,7 +39,7 @@ namespace UrlParsing
         /// </summary>
         /// <param name="e">페이지에 도달한 방법을 설명하는 이벤트 데이터입니다.
         /// 이 매개 변수는 일반적으로 페이지를 구성하는 데 사용됩니다.</param>
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             // TODO: 여기에 표시할 페이지를 준비합니다.
 
@@ -46,11 +48,37 @@ namespace UrlParsing
             // 하드웨어 뒤로 단추를 처리하는지 확인하십시오.
             // 일부 템플릿에서 제공하는 NavigationHelper를 사용할 경우
             // 이 이벤트가 자동으로 처리됩니다
+
+            btn_Next.Click += btnClick;
+
+            try
+            {
+                // 여기서 HTML코드를 가져올수 없다. DOM이 Load되지 않은 상태이기때문에.
+                web_ContentView.Navigate(new Uri(e.Parameter as String, UriKind.Absolute));
+                web_ContentView.DOMContentLoaded += async (sender, args) =>
+                {
+                    HtmlDocument html = new HtmlDocument();
+                    html.LoadHtml(await web_ContentView.InvokeScriptAsync("eval", new string[] { "document.documentElement.outerHTML;" }));
+                };
+            }
+            catch (System.FormatException ex) // for UriFormatException
+            {
+                Debug.WriteLine(ex.StackTrace);
+            }
         }
 
+        /// <summary>
+        /// 프레임의 페이지가 더 이상 활성 페이지가 아닐 때 호출됩니다.
+        /// </summary>
+        /// <param name="e">이벤트 데이터를 포함하는 개체입니다.</param>
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             // Unregister the current page as a share source.
+        }
+
+        private void btnClick(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(TestPage));
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="UrlParsing.MainPage"
+    x:Class="UrlParsing.TestPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:UrlParsing"
@@ -9,8 +9,6 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <WebView x:Name="web_ContentView" HorizontalAlignment="Left" Height="580" VerticalAlignment="Top" Width="400"/>
-        <Button x:Name="btn_Next" Margin="10,582,0,1" Width="380" Content="go next" />
 
     </Grid>
 </Page>
