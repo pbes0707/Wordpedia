@@ -83,10 +83,14 @@ namespace UrlParsing
             HtmlDocument html = new HtmlDocument();
             html.LoadHtml(await sender.InvokeScriptAsync("eval", new string[] { "document.documentElement.outerHTML;" }));
 
+            foreach (HtmlNode node in html.DocumentNode.Descendants("a"))
+            {
+                node.Attributes.Remove("href");
+            }
+
             foreach (HtmlNode node in html.DocumentNode.Descendants("div"))
             {
-                //node.Attributes.Remove("href");
-                node.SetAttributeValue("style", "background-color: black");
+                //node.SetAttributeValue("style", "background-color: black");
             }
 
             web_ContentView.NavigateToString(html.DocumentNode.OuterHtml);
