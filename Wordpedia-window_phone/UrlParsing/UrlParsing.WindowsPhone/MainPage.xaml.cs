@@ -10,6 +10,7 @@ using Windows.ApplicationModel.DataTransfer;
 using Windows.ApplicationModel.DataTransfer.ShareTarget;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -39,7 +40,7 @@ namespace UrlParsing
         /// </summary>
         /// <param name="e">페이지에 도달한 방법을 설명하는 이벤트 데이터입니다.
         /// 이 매개 변수는 일반적으로 페이지를 구성하는 데 사용됩니다.</param>
-        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             // TODO: 여기에 표시할 페이지를 준비합니다.
 
@@ -55,11 +56,7 @@ namespace UrlParsing
             {
                 // 여기서 HTML코드를 가져올수 없다. DOM이 Load되지 않은 상태이기때문에.
                 web_ContentView.Navigate(new Uri(e.Parameter as String, UriKind.Absolute));
-                web_ContentView.DOMContentLoaded += async (sender, args) =>
-                {
-                    HtmlDocument html = new HtmlDocument();
-                    html.LoadHtml(await web_ContentView.InvokeScriptAsync("eval", new string[] { "document.documentElement.outerHTML;" }));
-                };
+                web_ContentView.DOMContentLoaded += webViewContentLoaded;
             }
             catch (System.FormatException ex) // for UriFormatException
             {
@@ -79,6 +76,21 @@ namespace UrlParsing
         private void btnClick(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(TestPage));
+        }
+
+        private async void webViewContentLoaded(WebView sender, WebViewDOMContentLoadedEventArgs args)
+        {
+            HtmlDocument html = new HtmlDocument();
+            html.LoadHtml(await sender.InvokeScriptAsync("eval", new string[] { "document.documentElement.outerHTML;" }));
+
+            foreach (HtmlNode node in html.DocumentNode.Descendants("div"))
+            {
+                //node.Attributes.Remove("href");
+                node.SetAttributeValue("style", "background-color: black");
+            }
+
+            web_ContentView.NavigateToString(html.DocumentNode.OuterHtml);
+            web_ContentView.DOMContentLoaded -= webViewContentLoaded;
         }
     }
 }
