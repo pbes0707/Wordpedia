@@ -97,7 +97,7 @@ namespace UrlParsing
                 // 탐색 스택이 복원되지 않으면 첫 번째 페이지로 돌아가고
                 // 필요한 정보를 탐색 매개 변수로 전달하여 새 페이지를
                 // 구성합니다.
-                if (!rootFrame.Navigate(typeof(MainPage), e.Arguments))
+                if (!rootFrame.Navigate(typeof(URLParsePage), e.Arguments))
                 {
                     throw new Exception("Failed to create initial page");
                 }
@@ -145,7 +145,7 @@ namespace UrlParsing
                 if (uri != null)
                 {
                     Frame frame = new Frame();
-                    frame.Navigate(typeof(MainPage), uri.AbsoluteUri);
+                    frame.Navigate(typeof(URLParsePage), uri.AbsoluteUri);
                     Window.Current.Content = frame;
                     Window.Current.Activate();
                 }
