@@ -41,6 +41,12 @@
     <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\Assets\sample.png">
       <PackagePath>Assets\sample.png</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\Assets\sample2.png">
+      <PackagePath>Assets\sample2.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\Assets\sample3.png">
+      <PackagePath>Assets\sample3.png</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\Assets\SmallLogo.scale-240.png">
       <PackagePath>Assets\SmallLogo.scale-240.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
@@ -61,8 +67,14 @@
       <PackagePath>Assets\WideLogo.scale-240.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\Assets\ocr.jpg">
+      <PackagePath>Assets\ocr.jpg</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\Assets\sample.jpg">
       <PackagePath>Assets\sample.jpg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\Assets\adad.jpg">
+      <PackagePath>Assets\adad.jpg</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\OcrResources\MsOcrRes.orp">
       <PackagePath>OcrResources\MsOcrRes.orp</PackagePath>

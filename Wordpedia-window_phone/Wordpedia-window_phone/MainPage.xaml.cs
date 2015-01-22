@@ -30,7 +30,6 @@ namespace Wordpedia_window_phone
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        StorageFile temp_image;
         public MainPage()
         {
             this.InitializeComponent();
@@ -54,7 +53,6 @@ namespace Wordpedia_window_phone
             // this event is handled for you.
            // BitmapImage bm = new BitmapImage(new Uri(@"Assets/back.png", UriKind.RelativeOrAbsolute));
            // background.Source = bm;
-            temp_image = null;
         }
 
         private async void Button_Click(object sender, RoutedEventArgs e)
@@ -90,7 +88,9 @@ namespace Wordpedia_window_phone
                     image.Source = bitmap;
                 }
             }*/
-            StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Assets/sample.jpg"));
+
+            //////////////////Image Select//////////////////////
+            StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Assets/sample.png"));
             if (file != null)
             {
                 // Ensure the stream is disposed once the image is loaded
@@ -104,12 +104,17 @@ namespace Wordpedia_window_phone
                     image.Source = bitmap;
                 }
             }
+            byte[] mbuffer = bitmap.PixelBuffer.ToArray();//SeparateImage(bitmap);
 
+            /////////////////////OCR Activate///////////////////////
             ocrEngine = new OcrEngine(OcrLanguage.English);
-            var ocrResult = await ocrEngine.RecognizeAsync((uint)bitmap.PixelHeight, (uint)bitmap.PixelWidth, bitmap.PixelBuffer.ToArray());
+            var ocrResult = await ocrEngine.RecognizeAsync(
+                (uint)bitmap.PixelHeight,
+                (uint)bitmap.PixelWidth,
+                mbuffer);
+            StringBuilder ocr = new StringBuilder();
             if (ocrResult.Lines != null)
             {
-                StringBuilder ocr = new StringBuilder();
                 foreach (var line in ocrResult.Lines)
                 {
                     string newLine = string.Empty;
@@ -121,6 +126,28 @@ namespace Wordpedia_window_phone
                 }
                 textBlock.Text = ocr.ToString();
             }
+            ////////////////////////////String Split/////////////////////////////
+            string lowerString = ocr.ToString().ToLower();
+            string[] separators = { ",", ".", "!", "?", ";", ":", " " };
+            string[] words = lowerString.Split(separators, StringSplitOptions.RemoveEmptyEntries);
+
+        }
+
+        private byte[][] SeparateImage(WriteableBitmap bitmap)
+        {
+            int Length = 0, temp = 0;
+            byte[][] mbuffer = null;
+            foreach(byte v in bitmap.PixelBuffer.ToArray())
+            {
+                if (temp == 2600)
+                {
+                    ++Length;
+                    temp = 0;
+                }
+                mbuffer[Length][temp] = v;
+                ++temp;
+            }
+            return mbuffer;
         }
     }
 }
