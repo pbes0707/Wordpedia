@@ -36,3 +36,7 @@ C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\obj\ARM\Debug\qualifi
 C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\obj\ARM\Debug\qualifiers.txt.intermediate
 C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\obj\ARM\Debug\MultipleQualifiersPerDimensionFound.txt
 C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\obj\ARM\Debug\ProjectArchitectures.txt
+C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\bin\ARM\Debug\Microsoft.Threading.Tasks.dll
+C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\bin\ARM\Debug\Microsoft.Threading.Tasks.Extensions.dll
+C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\bin\ARM\Debug\Microsoft.Threading.Tasks.xml
+C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\bin\ARM\Debug\Microsoft.Threading.Tasks.Extensions.xml

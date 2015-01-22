@@ -1,82 +1,94 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <Machine>CLOGIC</Machine>
-    <WindowsUser>Pooh</WindowsUser>
+    <Machine>BILLBIRD</Machine>
+    <WindowsUser>john</WindowsUser>
     <TargetPlatformIdentifier>WindowsPhoneApp</TargetPlatformIdentifier>
     <SolutionConfiguration>Debug|x86</SolutionConfiguration>
     <PackageArchitecture>x86</PackageArchitecture>
     <PackageIdentityName>b53019fa-fa86-4624-9341-a9f58e56a0cd</PackageIdentityName>
-    <IntermediateOutputPath>C:\Workspace\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\obj\x86\Debug\</IntermediateOutputPath>
+    <IntermediateOutputPath>C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\obj\x86\Debug\</IntermediateOutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <AppXManifest Include="C:\Workspace\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\bin\x86\Debug\AppxManifest.xml">
+    <AppXManifest Include="C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\bin\x86\Debug\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
-    <AppxPackagedFile Include="C:\Workspace\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\bin\x86\Debug\Wordpedia-window_phone.exe">
+    <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\bin\x86\Debug\Wordpedia-window_phone.exe">
       <PackagePath>Wordpedia-window_phone.exe</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Workspace\Wordpedia\Wordpedia-window_phone\packages\Microsoft.Bcl.Async.1.0.168\lib\wpa81\Microsoft.Threading.Tasks.dll">
+    <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\packages\Microsoft.Bcl.Async.1.0.168\lib\wpa81\Microsoft.Threading.Tasks.dll">
       <PackagePath>Microsoft.Threading.Tasks.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Workspace\Wordpedia\Wordpedia-window_phone\packages\Microsoft.Bcl.Async.1.0.168\lib\wpa81\Microsoft.Threading.Tasks.Extensions.dll">
+    <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\packages\Microsoft.Bcl.Async.1.0.168\lib\wpa81\Microsoft.Threading.Tasks.Extensions.dll">
       <PackagePath>Microsoft.Threading.Tasks.Extensions.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Workspace\Wordpedia\Wordpedia-window_phone\packages\Microsoft.Windows.Ocr.1.0.0\build\wpa81\..\..\lib\wpa81\x86\WindowsPreview.Media.Ocr.dll">
+    <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\packages\Microsoft.Windows.Ocr.1.0.0\build\wpa81\..\..\lib\wpa81\x86\WindowsPreview.Media.Ocr.dll">
       <PackagePath>WindowsPreview.Media.Ocr.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Workspace\Wordpedia\Wordpedia-window_phone\packages\Microsoft.Windows.Ocr.1.0.0\build\wpa81\\..\..\lib\wpa81\x86\WindowsPreview.Media.Ocr.winmd">
+    <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\packages\Microsoft.Windows.Ocr.1.0.0\build\wpa81\\..\..\lib\wpa81\x86\WindowsPreview.Media.Ocr.winmd">
       <PackagePath>WindowsPreview.Media.Ocr.winmd</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Workspace\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\Assets\back.png">
+    <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\Assets\back.png">
       <PackagePath>Assets\back.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Workspace\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\Assets\Logo.scale-240.png">
+    <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\Assets\Logo.scale-240.png">
       <PackagePath>Assets\Logo.scale-240.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Workspace\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\Assets\sample.png">
+    <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\Assets\sample.png">
       <PackagePath>Assets\sample.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Workspace\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\Assets\SmallLogo.scale-240.png">
+    <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\Assets\sample2.png">
+      <PackagePath>Assets\sample2.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\Assets\sample3.png">
+      <PackagePath>Assets\sample3.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\Assets\SmallLogo.scale-240.png">
       <PackagePath>Assets\SmallLogo.scale-240.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Workspace\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\Assets\SplashScreen.scale-240.png">
+    <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\Assets\SplashScreen.scale-240.png">
       <PackagePath>Assets\SplashScreen.scale-240.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Workspace\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\Assets\Square71x71Logo.scale-240.png">
+    <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\Assets\Square71x71Logo.scale-240.png">
       <PackagePath>Assets\Square71x71Logo.scale-240.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Workspace\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\Assets\StoreLogo.scale-240.png">
+    <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\Assets\StoreLogo.scale-240.png">
       <PackagePath>Assets\StoreLogo.scale-240.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Workspace\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\Assets\WideLogo.scale-240.png">
+    <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\Assets\WideLogo.scale-240.png">
       <PackagePath>Assets\WideLogo.scale-240.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Workspace\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\Assets\sample.jpg">
+    <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\Assets\ocr.jpg">
+      <PackagePath>Assets\ocr.jpg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\Assets\sample.jpg">
       <PackagePath>Assets\sample.jpg</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Workspace\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\OcrResources\MsOcrRes.orp">
+    <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\Assets\adad.jpg">
+      <PackagePath>Assets\adad.jpg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\OcrResources\MsOcrRes.orp">
       <PackagePath>OcrResources\MsOcrRes.orp</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Workspace\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\bin\x86\Debug\App.xbf">
+    <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\bin\x86\Debug\App.xbf">
       <PackagePath>App.xbf</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Workspace\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\bin\x86\Debug\MainPage.xbf">
+    <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\bin\x86\Debug\MainPage.xbf">
       <PackagePath>MainPage.xbf</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Workspace\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\bin\x86\Debug\Wordpedia-window_phone.xr.xml">
+    <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\bin\x86\Debug\Wordpedia-window_phone.xr.xml">
       <PackagePath>Wordpedia-window_phone.xr.xml</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Workspace\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\bin\x86\Debug\resources.pri">
+    <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
     </AppxPackagedFile>
   </ItemGroup>
