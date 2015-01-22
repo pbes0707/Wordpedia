@@ -128,8 +128,29 @@ namespace Wordpedia_window_phone
             }
             ////////////////////////////String Split/////////////////////////////
             string lowerString = ocr.ToString().ToLower();
-            string[] separators = { ",", ".", "!", "?", ";", ":", " " };
+            string[] separators = { ",", ".", "!", "?", ";", ":", " ", "\r", "\n" };
             string[] words = lowerString.Split(separators, StringSplitOptions.RemoveEmptyEntries);
+
+            ///////////////////////////List Create////////////////////////////////
+            List<wordData> wordList = new List<wordData>();
+            foreach(string v in words)
+            {
+                bool _flag = false;
+                if (wordList.Count != 0)
+                {
+                    foreach (wordData c in wordList)
+                    {
+                        if (c.Word == v)
+                        {
+                            c.Count++;
+                            _flag = true;
+                            break;
+                        }
+                    }
+                }
+                if (_flag == false || wordList.Count == 0)
+                    wordList.Add(new wordData(v));
+            }
 
         }
 

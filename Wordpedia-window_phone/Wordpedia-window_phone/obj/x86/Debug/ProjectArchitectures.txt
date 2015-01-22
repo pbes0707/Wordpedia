@@ -1,1 +1,1 @@
-C:\Workspace\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\Wordpedia-window_phone.csproj;x86
+C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\Wordpedia-window_phone.csproj;x86
