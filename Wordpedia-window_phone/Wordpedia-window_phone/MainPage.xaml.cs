@@ -153,6 +153,7 @@ namespace Wordpedia_window_phone
                     wordList.Add(new wordData(v));
             }
             //////////////////////Sqlite Table Create///////////////////////
+            
         }
 
         private byte[][] SeparateImage(WriteableBitmap bitmap)

@@ -12,8 +12,7 @@
 
         <Grid 
             Height="63" 
-            VerticalAlignment="Top"
-            Width="400" 
+            VerticalAlignment="Top" 
             Background="#0067db">
 
             <TextBox 
@@ -24,8 +23,7 @@
                 VerticalAlignment="Center"
                 TextAlignment="Center"
                 Background="Transparent"
-                BorderThickness="0"
-                Width="400"/>
+                BorderThickness="0"/>
         </Grid>
         <ScrollViewer 
             x:Name="sv_Content"
