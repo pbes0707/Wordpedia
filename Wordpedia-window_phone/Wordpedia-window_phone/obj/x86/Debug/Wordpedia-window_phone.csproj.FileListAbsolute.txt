@@ -82,3 +82,8 @@ C:\Workspace\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\obj\x86\Deb
 C:\Workspace\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\obj\x86\Debug\qualifiers.txt.intermediate
 C:\Workspace\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\obj\x86\Debug\MultipleQualifiersPerDimensionFound.txt
 C:\Workspace\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\obj\x86\Debug\ProjectArchitectures.txt
+C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\obj\x86\Debug\Library.g.i.cs
+C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\obj\x86\Debug\Library.g.cs
+C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\bin\x86\Debug\Library.xbf
+C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\obj\x86\Debug\Library.xaml
+C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\obj\x86\Debug\Library.xbf

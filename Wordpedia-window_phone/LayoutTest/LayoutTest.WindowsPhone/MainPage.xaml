@@ -9,7 +9,10 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-
+        <Grid
+            Background="#262626">
+            
+        </Grid>
         <Grid 
             Height="63" 
             VerticalAlignment="Top" 
@@ -23,7 +26,7 @@
                 VerticalAlignment="Center"
                 TextAlignment="Center"
                 Background="Transparent"
-                BorderThickness="0"/>
+                BorderThickness="0" FontSize="30"/>
         </Grid>
         <ScrollViewer 
             x:Name="sv_Content"
