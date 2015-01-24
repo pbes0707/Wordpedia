@@ -5,8 +5,6 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Windows.ApplicationModel.DataTransfer;
-using Windows.ApplicationModel.DataTransfer.ShareTarget;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -20,7 +18,7 @@ using Windows.UI.Xaml.Navigation;
 
 // 새 응용 프로그램 템플릿에 대한 설명은 http://go.microsoft.com/fwlink/?LinkId=234227에 나와 있습니다.
 
-namespace UrlParsing
+namespace LayoutTest
 {
     /// <summary>
     /// 기본 응용 프로그램 클래스를 보완하는 응용 프로그램별 동작을 제공합니다.
@@ -97,7 +95,7 @@ namespace UrlParsing
                 // 탐색 스택이 복원되지 않으면 첫 번째 페이지로 돌아가고
                 // 필요한 정보를 탐색 매개 변수로 전달하여 새 페이지를
                 // 구성합니다.
-                if (!rootFrame.Navigate(typeof(URLParsePage), e.Arguments))
+                if (!rootFrame.Navigate(typeof(MainPage), e.Arguments))
                 {
                     throw new Exception("Failed to create initial page");
                 }
@@ -134,28 +132,6 @@ namespace UrlParsing
 
             // TODO: 응용 프로그램 상태를 저장하고 백그라운드 작업을 모두 중지합니다.
             deferral.Complete();
-        }
-
-        protected override async void OnShareTargetActivated(ShareTargetActivatedEventArgs args)
-        {
-            ShareOperation shareOperation = args.ShareOperation;
-            if (shareOperation.Data.Contains(StandardDataFormats.WebLink))
-            {
-                Uri uri = await shareOperation.Data.GetWebLinkAsync();
-                if (uri != null)
-                {
-                    Frame frame = new Frame();
-                    frame.Navigate(typeof(URLParsePage), uri.AbsoluteUri);
-                    Window.Current.Content = frame;
-                    Window.Current.Activate();
-                }
-            }
-
-            if (shareOperation.Data.Contains(StandardDataFormats.Html))
-            {
-                string htmlFormat = await shareOperation.Data.GetHtmlFormatAsync();
-                string htmlFragment = HtmlFormatHelper.GetStaticFragment(htmlFormat);
-            }
         }
     }
 }

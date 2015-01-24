@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text.RegularExpressions;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -34,6 +35,22 @@ namespace UrlParsing
         /// 이 매개 변수는 일반적으로 페이지를 구성하는 데 사용됩니다.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            List<String> htmlList = e.Parameter as List<String>;
+
+            tb_HTML.Text = "";
+            foreach (String htmlContent in htmlList)
+            {
+                /*tb_HTML.Text += htmlContent;
+                tb_HTML.Text += "\n";*/
+                Regex regex = new Regex("<[^>]*>", RegexOptions.IgnoreCase);
+                String result = regex.Replace(htmlContent, "");
+                result = result.Replace("\n", "");
+                if (!result.Trim().Equals("") && !tb_HTML.Text.Contains(result))
+                {
+                    tb_HTML.Text += result;
+                    tb_HTML.Text += "\n";
+                }
+            }
         }
     }
 }

@@ -1,0 +1,84 @@
+﻿<Page
+    x:Class="LayoutTest.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:LayoutTest"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+
+        <Grid 
+            Height="63" 
+            VerticalAlignment="Top"
+            Width="400" 
+            Background="#0067db">
+
+            <TextBox 
+                HorizontalAlignment="Left"
+                TextWrapping="Wrap" 
+                Text="LIBRARY"
+                Foreground="White"
+                VerticalAlignment="Center"
+                TextAlignment="Center"
+                Background="Transparent"
+                BorderThickness="0"
+                Width="400"/>
+        </Grid>
+        <ScrollViewer 
+            x:Name="sv_Content"
+            Margin="10,68,10,342">
+            
+            <StackPanel
+                x:Name="sp_Content">
+                
+            </StackPanel>
+        </ScrollViewer>
+        <ListView 
+            x:Name="lv_CollectionList"
+            Height="327" 
+            Margin="10,303,10,0" 
+            VerticalAlignment="Top">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Height="110" Margin="6">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Border 
+                            Grid.Column="0"
+                            Background="#ABABAB"
+                            Width="110"
+                            Height="110">
+                            <Image 
+                                Source="{Binding Image}"
+                                Stretch="UniformToFill" />
+                        </Border>
+                        <StackPanel 
+                            Grid.Column="1" 
+                            VerticalAlignment="Top"
+                            Orientation="Vertical"
+                            Margin="10, 0, 0, 0">
+                            <TextBlock 
+                                Text="{Binding Title}" 
+                                Style="{StaticResource TitleTextBlockStyle}" 
+                                TextWrapping="NoWrap" />
+                            <TextBlock
+                                Text="{Binding Subtitle}"
+                                Style="{StaticResource BodyTextBlockStyle}"
+                                TextWrapping="NoWrap" />
+                            <TextBlock
+                                Text="{Binding Description}"
+                                Style="{StaticResource BodyTextBlockStyle}"
+                                MaxHeight="60" />
+
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Page>
