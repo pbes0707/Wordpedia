@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Wordpedia_window_phone
 {
-    class collectionData
+    class vocaData
     {
         public String Title { get; set; }
         public String Date { get; set; }

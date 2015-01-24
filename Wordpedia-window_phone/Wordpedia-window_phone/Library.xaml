@@ -110,9 +110,11 @@
                 BorderThickness="0" FontSize="30"/>
         </Grid>
         <ListView 
-            x:Name="lv_CollectionList"
+            x:Name="lv_Voca"
             Margin="0,196,0,0" 
-            VerticalAlignment="Top" Height="427">
+            VerticalAlignment="Top"
+            Height="427"
+            SelectionChanged="lv_CollectionList_SelectionChanged">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid Height="110" Margin="6">
@@ -135,14 +137,17 @@
                             Orientation="Vertical"
                             Margin="10, 0, 0, 0">
                             <TextBlock 
+                                Name="tb_title"
                                 Text="{Binding Title}" 
                                 Style="{StaticResource TitleTextBlockStyle}" 
                                 TextWrapping="NoWrap" />
                             <TextBlock
+                                Name="tb_date"
                                 Text="{Binding Date}"
                                 Style="{StaticResource BodyTextBlockStyle}"
                                 TextWrapping="NoWrap" />
                             <TextBlock
+                                Name="tb_translate"
                                 Text="{Binding Translate}"
                                 Style="{StaticResource BodyTextBlockStyle}"
                                 MaxHeight="60" />
@@ -177,7 +182,7 @@
                 Margin="0,-10,-10,0"
                 Width="100" Height="100"
                 VerticalAlignment="Top"
-                Style="{StaticResource RoundButtonStyle}"/>
+                Style="{StaticResource RoundButtonStyle}" Click="btn_capture_Click"/>
 
     </Grid>
 </Page>

@@ -15,6 +15,9 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.Media.Capture;
+using Windows.UI.Xaml.Media.Imaging;
+using System.Threading.Tasks;
 
 // 빈 페이지 항목 템플릿에 대한 설명은 http://go.microsoft.com/fwlink/?LinkId=234238에 나와 있습니다.
 
@@ -25,7 +28,9 @@ namespace LayoutTest
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        
+        TaskCompletionSource<StorageFile> completionSource;
+
+        WriteableBitmap writimage;
 
         public MainPage()
         {
@@ -34,59 +39,67 @@ namespace LayoutTest
             this.NavigationCacheMode = NavigationCacheMode.Required;
         }
 
-        /// <summary>
-        /// 이 페이지가 프레임에 표시되려고 할 때 호출됩니다.
-        /// </summary>
-        /// <param name="e">페이지에 도달한 방법을 설명하는 이벤트 데이터입니다.
-        /// 이 매개 변수는 일반적으로 페이지를 구성하는 데 사용됩니다.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            // TODO: 여기에 표시할 페이지를 준비합니다.
-
-            // TODO: 응용 프로그램에 여러 페이지가 포함된 경우
-            // Windows.Phone.UI.Input.HardwareButtons.BackPressed 이벤트에 등록하여
-            // 하드웨어 뒤로 단추를 처리하는지 확인하십시오.
-            // 일부 템플릿에서 제공하는 NavigationHelper를 사용할 경우
-            // 이 이벤트가 자동으로 처리됩니다.
-
-            List<test> list = new List<test>();
-            for (int i = 0; i < 10; i++)
-            {
-                test Test = new test();
-
-                list.Add(new test()
-                {
-                    Title = "seungil : " + i.ToString(),
-                    Subtitle = i.ToString(),
-                    Description = "secret : " + i.ToString()
-                });
-            }
-            lv_CollectionList.ItemsSource = list;
         }
 
-        public class test
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            private String title;
-            private String subtitle;
-            private String description;
-
-            public String Title
+            try
             {
-                get { return title; }
-                set { title = value; }
-            }
+                var openPicker = new FileOpenPicker
+                {
+                    SuggestedStartLocation = PickerLocationId.PicturesLibrary,
+                    ViewMode = PickerViewMode.Thumbnail
+                };
 
-            public String Subtitle
-            {
-                get { return subtitle; }
-                set { subtitle = value; }
-            }
+                // Filter to include a sample subset of file types.
+                openPicker.FileTypeFilter.Clear();
+                openPicker.FileTypeFilter.Add(".bmp");
+                openPicker.FileTypeFilter.Add(".png");
+                openPicker.FileTypeFilter.Add(".jpeg");
+                openPicker.FileTypeFilter.Add(".jpg");
 
-            public String Description
-            {
-                get { return description; }
-                set { description = value; }
+                PickImage(openPicker);
             }
+            catch (Exception)
+            {
+
+            }
+        }
+        private async void PickImage(FileOpenPicker openPicker)
+        {
+            try
+            {
+                this.completionSource = new TaskCompletionSource<StorageFile>();
+
+                openPicker.PickSingleFileAndContinue();
+
+                StorageFile file = await this.completionSource.Task;
+
+                if (file != null)
+                {
+                    img.Source = await MakeImage(file);
+                }
+            }
+            catch (Exception)
+            { }
+        }
+        
+        async Task<ImageSource> MakeImage(StorageFile file)
+        {
+            BitmapImage bitmapImage = null;
+
+            if (file != null)
+            {
+                bitmapImage = new BitmapImage();
+
+                using (var stream = await file.OpenReadAsync())
+                {
+                    await bitmapImage.SetSourceAsync(stream);
+                }
+            }
+            return (bitmapImage);
         }
     }
 }

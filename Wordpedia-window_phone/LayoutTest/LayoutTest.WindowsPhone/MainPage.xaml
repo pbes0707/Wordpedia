@@ -9,10 +9,6 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <Grid
-            Background="#262626">
-            
-        </Grid>
         <Grid 
             Height="63" 
             VerticalAlignment="Top" 
@@ -28,58 +24,8 @@
                 Background="Transparent"
                 BorderThickness="0" FontSize="30"/>
         </Grid>
-        <ScrollViewer 
-            x:Name="sv_Content"
-            Margin="10,68,10,342">
-            
-            <StackPanel
-                x:Name="sp_Content">
-                
-            </StackPanel>
-        </ScrollViewer>
-        <ListView 
-            x:Name="lv_CollectionList"
-            Height="327" 
-            Margin="10,303,10,0" 
-            VerticalAlignment="Top">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Grid Height="110" Margin="6">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Border 
-                            Grid.Column="0"
-                            Background="#ABABAB"
-                            Width="110"
-                            Height="110">
-                            <Image 
-                                Source="{Binding Image}"
-                                Stretch="UniformToFill" />
-                        </Border>
-                        <StackPanel 
-                            Grid.Column="1" 
-                            VerticalAlignment="Top"
-                            Orientation="Vertical"
-                            Margin="10, 0, 0, 0">
-                            <TextBlock 
-                                Text="{Binding Title}" 
-                                Style="{StaticResource TitleTextBlockStyle}" 
-                                TextWrapping="NoWrap" />
-                            <TextBlock
-                                Text="{Binding Subtitle}"
-                                Style="{StaticResource BodyTextBlockStyle}"
-                                TextWrapping="NoWrap" />
-                            <TextBlock
-                                Text="{Binding Description}"
-                                Style="{StaticResource BodyTextBlockStyle}"
-                                MaxHeight="60" />
+        <Button Content="Button" HorizontalAlignment="Left" Margin="281,561,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+        <Image x:Name="img" HorizontalAlignment="Left" Height="481" Margin="0,68,0,0" VerticalAlignment="Top" Width="400"/>
 
-                        </StackPanel>
-                    </Grid>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
     </Grid>
 </Page>
