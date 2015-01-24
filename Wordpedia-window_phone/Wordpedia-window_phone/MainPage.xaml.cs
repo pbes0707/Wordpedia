@@ -20,6 +20,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.Storage.Streams;
 using WindowsPreview.Media.Ocr;
+using SQLite;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=391641
 
@@ -151,7 +152,7 @@ namespace Wordpedia_window_phone
                 if (_flag == false || wordList.Count == 0)
                     wordList.Add(new wordData(v));
             }
-
+            //////////////////////Sqlite Table Create///////////////////////
         }
 
         private byte[][] SeparateImage(WriteableBitmap bitmap)
