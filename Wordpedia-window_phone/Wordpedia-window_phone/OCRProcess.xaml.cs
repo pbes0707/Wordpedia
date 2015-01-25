@@ -111,8 +111,9 @@ namespace Wordpedia_window_phone
                     }
                 }
                 if (_flag == false || wordList.Count == 0)
-                    wordList.Add(new wordData(v));
+                    wordList.Add(new wordData(v, v));
             }
+            /////////////////////Word Translate Request to Server/////////////
             ////////////////////Image Copy to Local Folder////////////////////
             StorageFolder folder = Windows.Storage.ApplicationData.Current.LocalFolder;
             StorageFile file = await folder.CreateFileAsync("wordpedia_" + new Random().Next(0,10000).ToString() + ".img", CreationCollisionOption.GenerateUniqueName);

@@ -99,15 +99,14 @@
             VerticalAlignment="Top" 
             Background="#0067db">
 
-            <TextBox 
+            <TextBlock
                 HorizontalAlignment="Left"
                 TextWrapping="Wrap" 
                 Text="LIBRARY"
                 Foreground="White"
                 VerticalAlignment="Center"
                 TextAlignment="Center"
-                Background="Transparent"
-                BorderThickness="0" FontSize="30"/>
+                FontSize="30"/>
         </Grid>
         <ListView 
             x:Name="lv_Voca"
@@ -124,12 +123,12 @@
                         </Grid.ColumnDefinitions>
                         <Border 
                             Grid.Column="0"
-                            Background="#ABABAB"
+                            Background="#FFFFFF"
                             Width="110"
                             Height="110">
-                            <Image 
-                                Source="{Binding Image}"
-                                Stretch="UniformToFill" />
+                            <TextBlock 
+                                Name="thumbnail"
+                                Text="{Binding Kind}" FontSize="48" TextAlignment="Center" Foreground="#FF3F0505"/>
                         </Border>
                         <StackPanel 
                             Grid.Column="1" 

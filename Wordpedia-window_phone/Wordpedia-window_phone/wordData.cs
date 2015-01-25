@@ -8,23 +8,14 @@ namespace Wordpedia_window_phone
 {
     class wordData
     {
-        public wordData(string _word)
+        public wordData(String _word, String _translateWord)
         {
-            this._word = _word;
-            this._count = 1;
+            Word = _word;
+            TranslateWord = _translateWord;
+            Count = 1;
         }
-        private string _word;
-        private int _count;
-
-        public string Word
-        {
-            get { return _word; }
-            set { _word = value; }
-        }
-        public int Count
-        {
-            get { return _count; }
-            set { _count = value; }
-        }
+        public String Word {get; set;}
+        public String TranslateWord { get; set; }
+        public int Count {get; set;}
     }
 }

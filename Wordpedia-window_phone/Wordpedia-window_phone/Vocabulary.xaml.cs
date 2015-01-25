@@ -32,7 +32,20 @@ namespace Wordpedia_window_phone
         {
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
             vocaData t = (vocaData)e.Parameter;
+
+            initialize(t);
         }
+
+
+        private void initialize(vocaData t)
+        {
+            tb_Title.Text = t.Title;
+            tb_Article.Text = t.Article;
+
+            lv_words.ItemsSource = t.Words;
+
+        }
+
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             HardwareButtons.BackPressed -= HardwareButtons_BackPressed;

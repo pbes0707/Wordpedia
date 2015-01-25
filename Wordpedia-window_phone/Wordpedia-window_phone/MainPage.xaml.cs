@@ -150,7 +150,7 @@ namespace Wordpedia_window_phone
                     }
                 }
                 if (_flag == false || wordList.Count == 0)
-                    wordList.Add(new wordData(v));
+                    wordList.Add(new wordData(v, v));
             }
             //////////////////////Sqlite Table Create///////////////////////
             

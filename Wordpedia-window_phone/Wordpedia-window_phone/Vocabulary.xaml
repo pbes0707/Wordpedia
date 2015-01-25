@@ -6,9 +6,82 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="#262626">
 
     <Grid>
+        <Grid 
+            Height="63" 
+            VerticalAlignment="Top" 
+            Background="#0067db">
 
+            <TextBlock 
+                HorizontalAlignment="Left"
+                TextWrapping="Wrap" 
+                Text="VOCABULARY"
+                Foreground="White"
+                VerticalAlignment="Center"
+                TextAlignment="Center"
+                FontSize="30"/>
+        </Grid>
+        <TextBlock x:Name="tb_Title" 
+                   HorizontalAlignment="Left"
+                   Margin="10,68,0,0"
+                   TextWrapping="Wrap"
+                   VerticalAlignment="Top"
+                   Height="49" Width="380" FontSize="44"/>
+        <Grid
+            Height="225" 
+            VerticalAlignment="Top"
+            Background="#ffffff" Margin="0,124,0,0">
+            <ScrollViewer Name="ArticleScrollViewer">
+                <TextBox x:Name="tb_Article"
+                   HorizontalAlignment="Left"
+                   Height="225" Width="390"
+                   FontSize="20"
+                   TextWrapping="Wrap" 
+                   VerticalAlignment="Top"
+                   Foreground="Black" IsReadOnly="True"
+                         ScrollViewer.VerticalScrollMode="Enabled"
+                         SelectionHighlightColor="White"
+                         Margin="5,0,0,0"/>
+            </ScrollViewer>
+        </Grid>
+        <ListView 
+            x:Name="lv_words"
+            Margin="0,360,0,0" 
+            VerticalAlignment="Top"
+            Height="270">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Height="70" Margin="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel 
+                            Grid.Column="1" 
+                            VerticalAlignment="Top"
+                            Orientation="Vertical"
+                            Margin="10, 0, 0, 0"
+                            Height="70">
+                            <TextBlock 
+                                Name="tb_word"
+                                Text="{Binding Word}" 
+                                FontSize="20"
+                                TextWrapping="NoWrap" />
+                            <TextBlock
+                                Name="tb_translateword"
+                                Text="{Binding TranslateWord}"
+                                TextWrapping="NoWrap" />
+                            <TextBlock
+                                Name="tb_count"
+                                Text="{Binding Count}"
+                                MaxHeight="40" />
+
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Page>
