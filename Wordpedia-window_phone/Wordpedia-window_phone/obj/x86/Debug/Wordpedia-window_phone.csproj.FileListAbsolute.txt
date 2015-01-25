@@ -92,3 +92,10 @@ C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\obj\x86\Debug\OCRProc
 C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\obj\x86\Debug\OCRProcess.g.cs
 C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\obj\x86\Debug\OCRProcess.xaml
 C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\obj\x86\Debug\OCRProcess.xbf
+C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\obj\x86\Debug\Vocabulary.g.i.cs
+C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\obj\x86\Debug\Vocabulary.g.cs
+C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\obj\x86\Debug\Vocabulary.xaml
+C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\obj\x86\Debug\Vocabulary.xbf
+C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\bin\x86\Debug\Vocabulary.xbf
+C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\bin\x86\Debug\Newtonsoft.Json.dll
+C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\bin\x86\Debug\Newtonsoft.Json.xml

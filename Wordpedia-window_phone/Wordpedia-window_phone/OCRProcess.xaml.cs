@@ -6,6 +6,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -15,6 +16,9 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 using WindowsPreview.Media.Ocr;
+using SQLite;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -25,6 +29,7 @@ namespace Wordpedia_window_phone
     /// </summary>
     public sealed partial class OCRProcess : Page
     {
+        private SQLiteConnection conn;
         private OcrEngine ocrEngine;
 
         public OCRProcess()
@@ -41,8 +46,13 @@ namespace Wordpedia_window_phone
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             WriteableBitmap img = (WriteableBitmap)e.Parameter;
-
+            //////////////////////////OCR Activate///////////////////////////
             OCRActivate(img);
+        }
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            if (conn != null)
+                conn.Close();
         }
 
         private async void OCRActivate(WriteableBitmap bitmap)
@@ -77,10 +87,76 @@ namespace Wordpedia_window_phone
                     ocr.AppendLine(newLine);
                 }
             }
-            kind t = new kind();
-            t.Spec = 1;
-            t.Text = ocr.ToString();
-            this.Frame.Navigate(typeof(Vocabulary), t);
+            ////////////////////////////String Split/////////////////////////////
+            string lowerString = ocr.ToString().ToLower();
+            string[] separators = { ",", ".", "!", "?", ";", ":", " ", "\r", "\n", "\t" };
+            string[] words = lowerString.Split(separators, StringSplitOptions.RemoveEmptyEntries);
+
+            ///////////////////////////List Create////////////////////////////////
+            List<wordData> wordList = new List<wordData>();
+            foreach (string v in words)
+            {
+                bool _flag = false;
+                if (wordList.Count != 0)
+                {
+                    foreach (wordData c in wordList)
+                    {
+                        if (c.Word == v)
+                        {
+                            c.Count++;
+                            _flag = true;
+                            break;
+                        }
+                    }
+                }
+                if (_flag == false || wordList.Count == 0)
+                    wordList.Add(new wordData(v));
+            }
+            ////////////////////Image Copy to Local Folder////////////////////
+            StorageFolder folder = Windows.Storage.ApplicationData.Current.LocalFolder;
+            StorageFile file = await folder.CreateFileAsync("wordpedia_" + new Random().Next(0,10000).ToString() + ".img", CreationCollisionOption.GenerateUniqueName);
+            await FileIO.WriteBufferAsync(file, bitmap.PixelBuffer);
+
+            //////////////////////Voca Data Create//////////////////////////
+            vocaData vocadata = new vocaData()
+            {
+                Kind = 1,
+                Title = ocr.ToString().Substring(0, 15),
+                Date = DateTime.Now,
+                Translate = "en-kr",
+                Words = wordList,
+
+                Img = file.Path,
+                Article = lowerString,
+                Href = null
+            };
+            ////////////////// vocaData -> SQLvocaData ///////////////////
+
+            string json = JsonConvert.SerializeObject(vocadata.Words);
+            SQLvocaData sqlvocadata = new SQLvocaData()
+            {
+                Kind = vocadata.Kind,
+                Title = vocadata.Title,
+                Date = vocadata.Date,
+                Translate = vocadata.Translate,
+                JsonWords = json,
+
+                Img = vocadata.Img,
+                Article = vocadata.Article,
+                Href = vocadata.Href
+            };
+
+            ///////////////////SQLite DB 에 저장한다.//////////////////////
+
+            string strConn = Path.Combine(Path.Combine(ApplicationData.Current.LocalFolder.Path, "Vocabulary.sqlite")); ;
+
+            conn = new SQLiteConnection(strConn);
+            conn.CreateTable<SQLvocaData>();
+            List<SQLvocaData> retrievedTasks = conn.Table<SQLvocaData>().ToList<SQLvocaData>();
+            conn.Insert(sqlvocadata);
+
+            conn.Close();
+            this.Frame.Navigate(typeof(Vocabulary), vocadata);
         }
     }
 }

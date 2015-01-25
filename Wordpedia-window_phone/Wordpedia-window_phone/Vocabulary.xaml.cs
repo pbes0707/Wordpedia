@@ -13,6 +13,11 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using SQLite;
+using Windows.Storage;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Windows.UI.Xaml.Media.Imaging;
+using Windows.Phone.UI.Input;
 
 namespace Wordpedia_window_phone
 {
@@ -25,52 +30,23 @@ namespace Wordpedia_window_phone
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            kind t = (kind)e.Parameter;
+            vocaData t = (vocaData)e.Parameter;
 
-            switch(t.Spec)
+        }
+        private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
+        {
+            Frame frame = Window.Current.Content as Frame;
+            if (frame == null)
             {
-                case 0: // 이미 제작된 단어장을 불러올 때
-                    {
-                        break;
-                    }
-                case 1: // 새로운 단어장을 Create 할 때
-                    {
-                        ////////////////////////////String Split/////////////////////////////
-                        string lowerString = t.Text.ToLower();
-                        string[] separators = { ",", ".", "!", "?", ";", ":", " ", "\r", "\n", "\t" };
-                        string[] words = lowerString.Split(separators, StringSplitOptions.RemoveEmptyEntries);
+                return;
+            }
 
-                        ///////////////////////////List Create////////////////////////////////
-                        List<wordData> wordList = new List<wordData>();
-                        foreach (string v in words)
-                        {
-                            bool _flag = false;
-                            if (wordList.Count != 0)
-                            {
-                                foreach (wordData c in wordList)
-                                {
-                                    if (c.Word == v)
-                                    {
-                                        c.Count++;
-                                        _flag = true;
-                                        break;
-                                    }
-                                }
-                            }
-                            if (_flag == false || wordList.Count == 0)
-                                wordList.Add(new wordData(v));
-                        }
-                        //////////////////////Sqlite Table Create///////////////////////
-                        SQLiteCommand
-                        break;
-                    }
+            if (frame.CanGoBack)
+            {
+                frame.GoBack();
+                e.Handled = true;
             }
         }
-    }
 
-    class kind
-    {
-        public int Spec { get; set; }
-        public String Text { get; set; }
     }
 }

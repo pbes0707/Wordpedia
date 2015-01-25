@@ -188,5 +188,6 @@
     </RootType>
     <RootType FullName="Wordpedia_window_phone.MainPage" />
     <RootType FullName="Wordpedia_window_phone.OCRProcess" />
+    <RootType FullName="Wordpedia_window_phone.Vocabulary" />
   </Roots.RootTypes>
 </Roots>

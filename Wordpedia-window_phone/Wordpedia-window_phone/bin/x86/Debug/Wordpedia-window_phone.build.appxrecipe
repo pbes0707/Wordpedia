@@ -25,6 +25,9 @@
     <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\packages\Microsoft.Bcl.Async.1.0.168\lib\wpa81\Microsoft.Threading.Tasks.Extensions.dll">
       <PackagePath>Microsoft.Threading.Tasks.Extensions.dll</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\packages\Newtonsoft.Json.6.0.8\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll">
+      <PackagePath>Newtonsoft.Json.dll</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\packages\Microsoft.Windows.Ocr.1.0.0\build\wpa81\..\..\lib\wpa81\x86\WindowsPreview.Media.Ocr.dll">
       <PackagePath>WindowsPreview.Media.Ocr.dll</PackagePath>
     </AppxPackagedFile>
@@ -93,6 +96,9 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\bin\x86\Debug\OCRProcess.xbf">
       <PackagePath>OCRProcess.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\bin\x86\Debug\Vocabulary.xbf">
+      <PackagePath>Vocabulary.xbf</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\bin\x86\Debug\Wordpedia-window_phone.xr.xml">
       <PackagePath>Wordpedia-window_phone.xr.xml</PackagePath>

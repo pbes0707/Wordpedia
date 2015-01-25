@@ -21,11 +21,15 @@ using System.Threading.Tasks;
 using SQLite;
 using Windows.Storage.Streams;
 using Windows.Storage.FileProperties;
+using Newtonsoft.Json;
+using Windows.Phone.UI.Input;
 
 namespace Wordpedia_window_phone
 {
     public sealed partial class Library : Page
     {
+        private SQLiteConnection conn;
+
         public Library()
         {
             this.InitializeComponent();
@@ -38,24 +42,56 @@ namespace Wordpedia_window_phone
 
             initialize();
         }
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            if (conn != null)
+                conn.Close();
+        }
 
         private void initialize()
         {
-            List<vocaData> list = new List<vocaData>();
-
             //////////////////////All Vocabulary Load/////////////////////////
-            for (int i = 0; i < 10; i++)
+            ////sqlite db 를 열어 SQLvocaData를 받아와 vocaData로 변환 뒤 list에 Add시킨다.////
+            /*for (int i = 0; i < 10; i++)
             {
                 list.Add(new vocaData()
                 {
                     Title = "Title : " + i.ToString(),
-                    Date = i.ToString(),
+                    Date = DateTime.Now,
                     Translate = "translate : " + i.ToString()
                 });
+            }*/
+
+            List<vocaData> vocalist = new List<vocaData>();
+
+
+            string strConn = Path.Combine(Path.Combine(ApplicationData.Current.LocalFolder.Path, "Vocabulary.sqlite")); ;
+
+            conn = new SQLiteConnection(strConn);
+            conn.CreateTable<SQLvocaData>();
+            List<SQLvocaData> SQLvocalist = conn.Table<SQLvocaData>().ToList<SQLvocaData>();
+
+            foreach(SQLvocaData v in SQLvocalist)
+            {
+                vocaData data = new vocaData()
+                {
+                    Kind = v.Kind,
+                    Title = v.Title,
+                    Date = v.Date,
+                    Translate = v.Translate,
+                    Words = JsonConvert.DeserializeObject<List<wordData>>(v.JsonWords),
+
+                    Img = v.Img,
+                    Article = v.Article,
+                    Href = v.Href
+                };
+
+                vocalist.Add(data);
             }
+
+            lv_Voca.ItemsSource = vocalist;
             /////////////////////////////////////////////////////////////////
 
-            lv_Voca.ItemsSource = list;
         }
 
         private void lv_CollectionList_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -64,9 +100,8 @@ namespace Wordpedia_window_phone
             vocaData v = lv_Voca.SelectedItems[0] as vocaData;
 
             /////////////////////단어장 오픈/////////////////////
-            kind t = new kind();
-            t.Spec = 0;
-            this.Frame.Navigate(typeof(Vocabulary), t);
+           
+            this.Frame.Navigate(typeof(Vocabulary), v);
         }
 
         private void btn_capture_Click(object sender, RoutedEventArgs e)
@@ -113,6 +148,21 @@ namespace Wordpedia_window_phone
 
             }
         }
+        private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
+        {
+            Frame frame = Window.Current.Content as Frame;
+            if (frame == null)
+            {
+                return;
+            }
+
+            if (frame.CanGoBack)
+            {
+                frame.GoBack();
+                e.Handled = true;
+            }
+        }
+
 
     }
 }
