@@ -10,7 +10,7 @@
   <Identity Name="b53019fa-fa86-4624-9341-a9f58e56a0cd" Publisher="CN=john" Version="1.0.0.0" ProcessorArchitecture="x86" />
   <mp:PhoneIdentity PhoneProductId="b53019fa-fa86-4624-9341-a9f58e56a0cd" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>Wordpedia-window_phone</DisplayName>
+    <DisplayName>Wordpedia</DisplayName>
     <PublisherDisplayName>john</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>

@@ -83,6 +83,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="OCRProcess.xaml.cs">
+      <DependentUpon>OCRProcess.xaml</DependentUpon>
+    </Compile>
     <Compile Include="vocaData.cs" />
     <Compile Include="Library.xaml.cs">
       <DependentUpon>Library.xaml</DependentUpon>
@@ -127,6 +130,10 @@
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="OCRProcess.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

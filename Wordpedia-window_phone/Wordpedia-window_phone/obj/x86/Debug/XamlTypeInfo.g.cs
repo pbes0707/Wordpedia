@@ -124,7 +124,7 @@ namespace Wordpedia_window_phone.Wordpedia_window_phone_XamlTypeInfo
 
         private void InitTypeTables()
         {
-            _typeNameTable = new string[7];
+            _typeNameTable = new string[8];
             _typeNameTable[0] = "Windows.UI.Text.FontWeight";
             _typeNameTable[1] = "System.ValueType";
             _typeNameTable[2] = "Object";
@@ -132,8 +132,9 @@ namespace Wordpedia_window_phone.Wordpedia_window_phone_XamlTypeInfo
             _typeNameTable[4] = "Windows.UI.Xaml.Controls.Page";
             _typeNameTable[5] = "Windows.UI.Xaml.Controls.UserControl";
             _typeNameTable[6] = "Wordpedia_window_phone.MainPage";
+            _typeNameTable[7] = "Wordpedia_window_phone.OCRProcess";
 
-            _typeTable = new global::System.Type[7];
+            _typeTable = new global::System.Type[8];
             _typeTable[0] = typeof(global::Windows.UI.Text.FontWeight);
             _typeTable[1] = typeof(global::System.ValueType);
             _typeTable[2] = typeof(global::System.Object);
@@ -141,6 +142,7 @@ namespace Wordpedia_window_phone.Wordpedia_window_phone_XamlTypeInfo
             _typeTable[4] = typeof(global::Windows.UI.Xaml.Controls.Page);
             _typeTable[5] = typeof(global::Windows.UI.Xaml.Controls.UserControl);
             _typeTable[6] = typeof(global::Wordpedia_window_phone.MainPage);
+            _typeTable[7] = typeof(global::Wordpedia_window_phone.OCRProcess);
         }
 
         private int LookupTypeIndexByName(string typeName)
@@ -177,6 +179,7 @@ namespace Wordpedia_window_phone.Wordpedia_window_phone_XamlTypeInfo
 
         private object Activate_3_Library() { return new global::Wordpedia_window_phone.Library(); }
         private object Activate_6_MainPage() { return new global::Wordpedia_window_phone.MainPage(); }
+        private object Activate_7_OCRProcess() { return new global::Wordpedia_window_phone.OCRProcess(); }
 
         private global::Windows.UI.Xaml.Markup.IXamlType CreateXamlType(int typeIndex)
         {
@@ -220,6 +223,13 @@ namespace Wordpedia_window_phone.Wordpedia_window_phone_XamlTypeInfo
             case 6:   //  Wordpedia_window_phone.MainPage
                 userType = new global::Wordpedia_window_phone.Wordpedia_window_phone_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
                 userType.Activator = Activate_6_MainPage;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 7:   //  Wordpedia_window_phone.OCRProcess
+                userType = new global::Wordpedia_window_phone.Wordpedia_window_phone_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
+                userType.Activator = Activate_7_OCRProcess;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;

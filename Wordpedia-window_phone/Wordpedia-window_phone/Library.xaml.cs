@@ -19,6 +19,8 @@ using Windows.Media.Capture;
 using Windows.UI.Xaml.Media.Imaging;
 using System.Threading.Tasks;
 using SQLite;
+using Windows.Storage.Streams;
+using Windows.Storage.FileProperties;
 
 namespace Wordpedia_window_phone
 {
@@ -79,49 +81,32 @@ namespace Wordpedia_window_phone
                 openPicker.FileTypeFilter.Add(".jpeg");
                 openPicker.FileTypeFilter.Add(".jpg");
 
-                PickImage(openPicker);
-            }
-            catch (Exception)
-            {
-
-            }
-        }
-
-        private async void PickImage(FileOpenPicker openPicker)
-        {
-            TaskCompletionSource<StorageFile> completionSource;
-
-            try
-            {
-                completionSource = new TaskCompletionSource<StorageFile>();
-
                 openPicker.PickSingleFileAndContinue();
-
-                StorageFile file = await completionSource.Task;
-
-                if (file != null)
-                {
-                    ImageSource img = await MakeImage(file);
-                }
             }
             catch (Exception)
-            { }
+            {
+
+            }
         }
 
-        async Task<ImageSource> MakeImage(StorageFile file)
+        public async void ContinueFileOpenPicker(FileOpenPickerContinuationEventArgs args)
         {
-            BitmapImage bitmapImage = null;
-
-            if (file != null)
+            if (args.Files.Count > 0)
             {
-                bitmapImage = new BitmapImage();
+                StorageFile file = args.Files[0];
 
-                using (var stream = await file.OpenReadAsync())
+                using (IRandomAccessStream fileStream = await file.OpenAsync(Windows.Storage.FileAccessMode.Read))
                 {
-                    await bitmapImage.SetSourceAsync(stream);
+                    ImageProperties props = await file.Properties.GetImagePropertiesAsync();
+                    int height = (int)props.Width;
+                    int width = (int)props.Width;
+                    WriteableBitmap bitmap = new WriteableBitmap(height, width);
+                    bitmap.SetSource(fileStream);
+
+                    this.Frame.Navigate(typeof(OCRProcess), bitmap);
                 }
+
             }
-            return (bitmapImage);
         }
     }
 }

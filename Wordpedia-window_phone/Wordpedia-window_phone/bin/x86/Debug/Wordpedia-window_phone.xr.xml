@@ -187,5 +187,6 @@
       <RootProperty Name="Rotation" />
     </RootType>
     <RootType FullName="Wordpedia_window_phone.MainPage" />
+    <RootType FullName="Wordpedia_window_phone.OCRProcess" />
   </Roots.RootTypes>
 </Roots>

@@ -91,6 +91,9 @@
     <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\bin\x86\Debug\MainPage.xbf">
       <PackagePath>MainPage.xbf</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\bin\x86\Debug\OCRProcess.xbf">
+      <PackagePath>OCRProcess.xbf</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\bin\x86\Debug\Wordpedia-window_phone.xr.xml">
       <PackagePath>Wordpedia-window_phone.xr.xml</PackagePath>
     </AppxPackagedFile>

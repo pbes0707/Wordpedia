@@ -127,5 +127,14 @@ namespace Wordpedia_window_phone
             // TODO: Save application state and stop any background activity
             deferral.Complete();
         }
+        protected override void OnActivated(IActivatedEventArgs args)
+        {
+            var root = Window.Current.Content as Frame;
+            var mainPage = root.Content as Library;
+            if (mainPage != null && args is FileOpenPickerContinuationEventArgs)
+            {
+                mainPage.ContinueFileOpenPicker(args as FileOpenPickerContinuationEventArgs);
+            }
+        }
     }
 }
