@@ -11,5 +11,14 @@ namespace Wordpedia_window_phone
         public String Title { get; set; }
         public String Date { get; set; }
         public String Translate { get; set; }
+
+        List<wordData> list = new List<wordData>();
+
+
+        public List<wordData> List
+        {
+            get { return list; }
+            set { list = value; }
+        }
     }
 }

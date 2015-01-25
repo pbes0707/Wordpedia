@@ -61,7 +61,12 @@ namespace Wordpedia_window_phone
         private void lv_CollectionList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (lv_Voca.SelectedItems.Count == 0) return;
-            vocaData v =  lv_Voca.SelectedItems[0] as vocaData;
+            vocaData v = lv_Voca.SelectedItems[0] as vocaData;
+
+            /////////////////////단어장 오픈/////////////////////
+            kind t = new kind();
+            t.Spec = 0;
+            this.Frame.Navigate(typeof(Vocabulary), t);
         }
 
         private void btn_capture_Click(object sender, RoutedEventArgs e)
@@ -108,5 +113,6 @@ namespace Wordpedia_window_phone
 
             }
         }
+
     }
 }
