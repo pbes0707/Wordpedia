@@ -30,8 +30,12 @@ namespace Wordpedia_window_phone
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            HardwareButtons.BackPressed += HardwareButtons_BackPressed;
             vocaData t = (vocaData)e.Parameter;
-
+        }
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
         }
         private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
         {
@@ -43,7 +47,7 @@ namespace Wordpedia_window_phone
 
             if (frame.CanGoBack)
             {
-                frame.GoBack();
+                frame.Navigate(typeof(Library));
                 e.Handled = true;
             }
         }

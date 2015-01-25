@@ -41,26 +41,19 @@ namespace Wordpedia_window_phone
             lv_Voca.Height = Window.Current.Bounds.Height - 225;
 
             initialize();
+            HardwareButtons.BackPressed += HardwareButtons_BackPressed;
         }
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             if (conn != null)
                 conn.Close();
+            HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
         }
 
         private void initialize()
         {
             //////////////////////All Vocabulary Load/////////////////////////
             ////sqlite db 를 열어 SQLvocaData를 받아와 vocaData로 변환 뒤 list에 Add시킨다.////
-            /*for (int i = 0; i < 10; i++)
-            {
-                list.Add(new vocaData()
-                {
-                    Title = "Title : " + i.ToString(),
-                    Date = DateTime.Now,
-                    Translate = "translate : " + i.ToString()
-                });
-            }*/
 
             List<vocaData> vocalist = new List<vocaData>();
 
@@ -135,13 +128,11 @@ namespace Wordpedia_window_phone
             {
                 StorageFile file = args.Files[0];
 
-                using (IRandomAccessStream fileStream = await file.OpenAsync(Windows.Storage.FileAccessMode.Read))
+                ImageProperties imgProp = await file.Properties.GetImagePropertiesAsync();
+                using (var imgStream = await file.OpenAsync(FileAccessMode.Read))
                 {
-                    ImageProperties props = await file.Properties.GetImagePropertiesAsync();
-                    int height = (int)props.Width;
-                    int width = (int)props.Width;
-                    WriteableBitmap bitmap = new WriteableBitmap(height, width);
-                    bitmap.SetSource(fileStream);
+                    WriteableBitmap bitmap = new WriteableBitmap((int)imgProp.Width, (int)imgProp.Height);
+                    bitmap.SetSource(imgStream);
 
                     this.Frame.Navigate(typeof(OCRProcess), bitmap);
                 }

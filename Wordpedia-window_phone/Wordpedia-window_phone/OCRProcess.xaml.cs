@@ -36,6 +36,7 @@ namespace Wordpedia_window_phone
         {
             this.InitializeComponent();
             ocrEngine = new OcrEngine(OcrLanguage.English);
+            this.Tag = "load";
         }
 
         /// <summary>
