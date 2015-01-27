@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text.RegularExpressions;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.ApplicationModel.DataTransfer.ShareTarget;
@@ -80,17 +81,32 @@ namespace Wordpedia_window_phone
 
         private async void btnNextClick(object sender, RoutedEventArgs e)
         {
-            String strHTML = "";
+            List<String> htmlList = new List<String>();
             htmlData.LoadHtml(await web_ContentView.InvokeScriptAsync("eval", new string[] { "document.documentElement.outerHTML;" }));
 
             foreach (HtmlNode node in htmlData.DocumentNode.Descendants("clicked"))
             {
-                strHTML += node.ParentNode.InnerHtml;
+                htmlList.Add(node.ParentNode.InnerHtml);
+            }
+
+            String strHTML = "";
+            foreach (String htmlContent in htmlList)
+            {
+                /*tb_HTML.Text += htmlContent;
+                tb_HTML.Text += "\n";*/
+                Regex regex = new Regex("<[^>]*>", RegexOptions.IgnoreCase);
+                String result = regex.Replace(htmlContent, "");
+                result = result.Replace("\n", "");
+                if (!result.Trim().Equals("") )//&& !strHTML.Contains(result))
+                {
+                    strHTML += result;
+                    strHTML += "\n";
+                }
             }
 
             transData = new TransmitData();
             transData.Spec = 2; //// HyperLink
-            transData.Path = ""; //// HTML Source Code
+            transData.Path = htmlData.DocumentNode.OuterHtml; //// HTML Source Code
             transData.Article = strHTML;
             this.Frame.Navigate(typeof(CreateVocabulary), transData);
         }

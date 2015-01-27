@@ -1,6 +1,6 @@
 <XamlCompilerSaveState>
   <ReferenceAssemblyList>
-    <LocalAssembly PathName="c:\wordpedia\wordpedia-window_phone\wordpedia-window_phone\obj\x86\debug\intermediatexaml\wordpedia-window_phone.exe" HashGuid="b8c2964e-a54e-6e66-125d-730be3751db0" />
+    <LocalAssembly PathName="c:\wordpedia\wordpedia-window_phone\wordpedia-window_phone\obj\x86\debug\intermediatexaml\wordpedia-window_phone.exe" HashGuid="0f925465-2adc-aa35-92cf-29d47ce02954" />
     <ReferenceAssembly PathName="c:\program files (x86)\microsoft sdks\windowsphoneapp\v8.1\extensionsdks\microsoft.vclibs\12.0\references\commonconfiguration\neutral\platform.winmd" HashGuid="58b6b6d1-928e-9908-9804-eb460e5e101b" />
     <ReferenceAssembly PathName="c:\wordpedia\wordpedia-window_phone\packages\htmlagilitypack.1.4.9\lib\portable-net45+netcore45+wpa81+wp8+monoandroid+monotouch\htmlagilitypack.dll" HashGuid="365e4636-8cbf-8d2d-3790-d3267e801443" />
     <ReferenceAssembly PathName="c:\wordpedia\wordpedia-window_phone\packages\microsoft.bcl.async.1.0.168\lib\wpa81\microsoft.threading.tasks.dll" HashGuid="3a1beea5-1547-d5c6-af32-3b5c761c2a6a" />

@@ -208,7 +208,7 @@ namespace Wordpedia_window_phone
 
             if (frame.CanGoBack)
             {
-                frame.GoBack();
+                return;
                 e.Handled = true;
             }
         }
