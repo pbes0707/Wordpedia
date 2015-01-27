@@ -23,12 +23,16 @@ using Windows.Storage.Streams;
 using Windows.Storage.FileProperties;
 using Newtonsoft.Json;
 using Windows.Phone.UI.Input;
+using System.Text;
+using WindowsPreview.Media.Ocr;
 
 namespace Wordpedia_window_phone
 {
     public sealed partial class Library : Page
     {
         private SQLiteConnection conn;
+        private TransmitData transData;
+        private List<vocaData> vocalist;
 
         public Library()
         {
@@ -55,7 +59,7 @@ namespace Wordpedia_window_phone
             //////////////////////All Vocabulary Load/////////////////////////
             ////sqlite db 를 열어 SQLvocaData를 받아와 vocaData로 변환 뒤 list에 Add시킨다.////
 
-            List<vocaData> vocalist = new List<vocaData>();
+            vocalist = new List<vocaData>();
 
 
             string strConn = Path.Combine(Path.Combine(ApplicationData.Current.LocalFolder.Path, "Vocabulary.sqlite")); ;
@@ -74,9 +78,8 @@ namespace Wordpedia_window_phone
                     Translate = v.Translate,
                     Words = JsonConvert.DeserializeObject<List<wordData>>(v.JsonWords),
 
-                    Img = v.Img,
+                    Path = v.Path,
                     Article = v.Article,
-                    Href = v.Href
                 };
 
                 vocalist.Add(data);
@@ -91,7 +94,7 @@ namespace Wordpedia_window_phone
         {
             if (lv_Voca.SelectedItems.Count == 0) return;
             vocaData v = lv_Voca.SelectedItems[0] as vocaData;
-
+            
             /////////////////////단어장 오픈/////////////////////
            
             this.Frame.Navigate(typeof(Vocabulary), v);
@@ -134,10 +137,66 @@ namespace Wordpedia_window_phone
                     WriteableBitmap bitmap = new WriteableBitmap((int)imgProp.Width, (int)imgProp.Height);
                     bitmap.SetSource(imgStream);
 
-                    this.Frame.Navigate(typeof(OCRProcess), bitmap);
-                }
+                    transData = new TransmitData();
+                    transData.Spec = 1;
+                    /////////////////////////OCRActivate//////////////////////////
+                    await OCRActivate(bitmap);
 
+                    this.Frame.Navigate(typeof(CreateVocabulary), transData);
+                    return;
+                }
             }
+        }
+        private async Task OCRActivate(WriteableBitmap bitmap)
+        {
+            //////////////////////Check Image Size//////////////////////
+            if (bitmap.PixelHeight < 40 ||
+                bitmap.PixelHeight > 2600 ||
+                bitmap.PixelWidth < 40 ||
+                bitmap.PixelWidth > 2600)
+            {
+                String Text = "Image size is not supported." +
+                                    Environment.NewLine +
+                                    "Loaded image size is " + bitmap.PixelWidth + "x" + bitmap.PixelHeight + "." +
+                                    Environment.NewLine +
+                                    "Supported image dimensions are between 40 and 2600 pixels.";
+
+                return;
+            }
+            ////////////////////Image Copy to Local Folder////////////////////
+            ///////////will add try catch///////
+
+            StorageFolder folder = Windows.Storage.ApplicationData.Current.LocalFolder;
+            StorageFile file = await folder.CreateFileAsync("wordpedia_" + new Random().Next(0, 10000).ToString() + ".img", CreationCollisionOption.GenerateUniqueName);
+            await FileIO.WriteBufferAsync(file, bitmap.PixelBuffer);
+
+            transData.Path = file.Path;
+
+            ///////////////////////Activate OCR////////////////////////////
+
+            OcrEngine ocrEngine = new OcrEngine(OcrLanguage.English);
+            var ocrResult = await ocrEngine.RecognizeAsync((uint)bitmap.PixelHeight, (uint)bitmap.PixelWidth, bitmap.PixelBuffer.ToArray());
+
+            StringBuilder ocr = new StringBuilder();
+            if (ocrResult.Lines != null)
+            {
+                foreach (var line in ocrResult.Lines)
+                {
+                    string newLine = string.Empty;
+                    foreach (var word in line.Words)
+                    {
+                        newLine = newLine + word.Text + " ";
+                    }
+                    ocr.AppendLine(newLine);
+                }
+            }
+            if (ocr.ToString().Length == 0)
+            {
+                ///////////No Vocabulary/////////////
+                this.Frame.Navigate(typeof(Library));
+                return;
+            }
+            transData.Article = ocr.ToString();
         }
         private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
         {
@@ -154,6 +213,20 @@ namespace Wordpedia_window_phone
             }
         }
 
+        private void btn_search_Click(object sender, RoutedEventArgs e)
+        {
+            //////////////////Search ///////////////////
+            String query = tb_search.Text;
+            List<vocaData> search_vocalist = new List<vocaData>();
+            foreach(vocaData v in vocalist)
+            {
+                if(v.Title.Contains(query)
+                    || v.Date.ToString().Contains(query))
+                    search_vocalist.Add(v);
+            }
+
+            lv_Voca.ItemsSource = search_vocalist;
+        }
 
     }
 }

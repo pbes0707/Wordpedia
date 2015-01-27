@@ -5,6 +5,8 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.ApplicationModel.DataTransfer;
+using Windows.ApplicationModel.DataTransfer.ShareTarget;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -134,6 +136,28 @@ namespace Wordpedia_window_phone
             if (mainPage != null && args is FileOpenPickerContinuationEventArgs)
             {
                 mainPage.ContinueFileOpenPicker(args as FileOpenPickerContinuationEventArgs);
+            }
+        }
+        /////////////////////////URL Parsing//////////////////////////
+        protected override async void OnShareTargetActivated(ShareTargetActivatedEventArgs args)
+        {
+            ShareOperation shareOperation = args.ShareOperation;
+            if (shareOperation.Data.Contains(StandardDataFormats.WebLink))
+            {
+                Uri uri = await shareOperation.Data.GetWebLinkAsync();
+                if (uri != null)
+                {
+                    Frame frame = new Frame();
+                    frame.Navigate(typeof(URLParsePage), uri.AbsoluteUri);
+                    Window.Current.Content = frame;
+                    Window.Current.Activate();
+                }
+            }
+
+            if (shareOperation.Data.Contains(StandardDataFormats.Html))
+            {
+                string htmlFormat = await shareOperation.Data.GetHtmlFormatAsync();
+                string htmlFragment = HtmlFormatHelper.GetStaticFragment(htmlFormat);
             }
         }
     }

@@ -15,8 +15,7 @@ namespace Wordpedia_window_phone
         public String Translate { get; set; }
         public List<wordData> Words { get; set; }
 
-        public String Href { get; set; }
-        public String Img { get; set; }
+        public String Path { get; set; }
         public String Article { get; set; }
 
     }
@@ -34,8 +33,7 @@ namespace Wordpedia_window_phone
         public String Translate { get; set; }
         public String JsonWords { get; set; }
 
-        public String Href { get; set; }
-        public String Img { get; set; }
+        public String Path { get; set; }
         public String Article { get; set; }
     }
 }

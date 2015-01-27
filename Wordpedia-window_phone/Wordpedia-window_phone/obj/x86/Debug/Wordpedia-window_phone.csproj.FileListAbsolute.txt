@@ -87,11 +87,6 @@ C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\obj\x86\Debug\Library
 C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\bin\x86\Debug\Library.xbf
 C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\obj\x86\Debug\Library.xaml
 C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\obj\x86\Debug\Library.xbf
-C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\bin\x86\Debug\OCRProcess.xbf
-C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\obj\x86\Debug\OCRProcess.g.i.cs
-C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\obj\x86\Debug\OCRProcess.g.cs
-C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\obj\x86\Debug\OCRProcess.xaml
-C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\obj\x86\Debug\OCRProcess.xbf
 C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\obj\x86\Debug\Vocabulary.g.i.cs
 C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\obj\x86\Debug\Vocabulary.g.cs
 C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\obj\x86\Debug\Vocabulary.xaml
@@ -99,3 +94,15 @@ C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\obj\x86\Debug\Vocabul
 C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\bin\x86\Debug\Vocabulary.xbf
 C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\bin\x86\Debug\Newtonsoft.Json.dll
 C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\bin\x86\Debug\Newtonsoft.Json.xml
+C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\obj\x86\Debug\URLParsePage.g.i.cs
+C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\obj\x86\Debug\URLParsePage.g.cs
+C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\obj\x86\Debug\URLParsePage.xaml
+C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\obj\x86\Debug\URLParsePage.xbf
+C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\bin\x86\Debug\CreateVocabulary.xbf
+C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\bin\x86\Debug\URLParsePage.xbf
+C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\bin\x86\Debug\HtmlAgilityPack.dll
+C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\bin\x86\Debug\HtmlAgilityPack.pdb
+C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\obj\x86\Debug\CreateVocabulary.g.i.cs
+C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\obj\x86\Debug\CreateVocabulary.g.cs
+C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\obj\x86\Debug\CreateVocabulary.xaml
+C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\obj\x86\Debug\CreateVocabulary.xbf

@@ -17,6 +17,7 @@ using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 using WindowsPreview.Media.Ocr;
 using SQLite;
+using Windows.Web.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
@@ -24,31 +25,22 @@ using Newtonsoft.Json;
 
 namespace Wordpedia_window_phone
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
-    public sealed partial class OCRProcess : Page
+    public sealed partial class CreateVocabulary : Page
     {
         private SQLiteConnection conn;
-        private OcrEngine ocrEngine;
+        private TransmitData data;
 
-        public OCRProcess()
+        public CreateVocabulary()
         {
             this.InitializeComponent();
-            ocrEngine = new OcrEngine(OcrLanguage.English);
-            this.Tag = "load";
         }
 
-        /// <summary>
-        /// Invoked when this page is about to be displayed in a Frame.
-        /// </summary>
-        /// <param name="e">Event data that describes how this page was reached.
-        /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            WriteableBitmap img = (WriteableBitmap)e.Parameter;
-            //////////////////////////OCR Activate///////////////////////////
-            OCRActivate(img);
+            data = (TransmitData)e.Parameter;
+
+            Process(data.Article);
+
         }
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
@@ -56,42 +48,12 @@ namespace Wordpedia_window_phone
                 conn.Close();
         }
 
-        private async void OCRActivate(WriteableBitmap bitmap)
+        private void Process(String article)
         {
-            if (bitmap.PixelHeight < 40 ||
-                bitmap.PixelHeight > 2600 ||
-                bitmap.PixelWidth < 40 ||
-                bitmap.PixelWidth > 2600)
-            {
-                String Text = "Image size is not supported." +
-                                    Environment.NewLine +
-                                    "Loaded image size is " + bitmap.PixelWidth + "x" + bitmap.PixelHeight + "." +
-                                    Environment.NewLine +
-                                    "Supported image dimensions are between 40 and 2600 pixels.";
-
-                return;
-            }
-
-            // This main API call to extract text from image.
-            var ocrResult = await ocrEngine.RecognizeAsync((uint)bitmap.PixelHeight, (uint)bitmap.PixelWidth, bitmap.PixelBuffer.ToArray());
-
-            StringBuilder ocr = new StringBuilder();
-            if (ocrResult.Lines != null)
-            {
-                foreach (var line in ocrResult.Lines)
-                {
-                    string newLine = string.Empty;
-                    foreach (var word in line.Words)
-                    {
-                        newLine = newLine + word.Text + " ";
-                    }
-                    ocr.AppendLine(newLine);
-                }
-            }
             ////////////////////////////String Split/////////////////////////////
-            string lowerString = ocr.ToString().ToLower();
-            string[] separators = { ",", ".", "!", "?", ";", ":", " ", "\r", "\n", "\t" };
-            string[] words = lowerString.Split(separators, StringSplitOptions.RemoveEmptyEntries);
+            String lowerArticle = article.ToLower();
+            String[] separators = { ",", ".", "!", "?", ";", ":", " ", "\r", "\n", "\t" };
+            String[] words = lowerArticle.Split(separators, StringSplitOptions.RemoveEmptyEntries);
 
             ///////////////////////////List Create////////////////////////////////
             List<wordData> wordList = new List<wordData>();
@@ -114,23 +76,38 @@ namespace Wordpedia_window_phone
                     wordList.Add(new wordData(v, v));
             }
             /////////////////////Word Translate Request to Server/////////////
-            ////////////////////Image Copy to Local Folder////////////////////
-            StorageFolder folder = Windows.Storage.ApplicationData.Current.LocalFolder;
-            StorageFile file = await folder.CreateFileAsync("wordpedia_" + new Random().Next(0,10000).ToString() + ".img", CreationCollisionOption.GenerateUniqueName);
-            await FileIO.WriteBufferAsync(file, bitmap.PixelBuffer);
+            /*String url = "http://wordpedia.herokuapp.com/translate/g/ko?";
+            foreach(wordData v in wordList)
+            {
+                if (wordList[0] != v)
+                    url += "&";
+                url += "w=" + v.Word;
+            }
+            Uri strUri = new Uri(url);
+            try
+            {
+                HttpClient httpClient = new HttpClient();
+                httpClient.DefaultRequestHeaders.Accept.TryParseAdd("application/json");
+                String ResponseString = await httpClient.GetStringAsync(strUri);
+                Dictionary<string, > jsonArray = JsonConvert.DeserializeObject(ResponseString);
+            }
+            catch(Exception ex)
+            {
 
+            }*/
             //////////////////////Voca Data Create//////////////////////////
+            ///////////Kind  1 : Image            2 : HyperLink/////////////
+            ///////////Path  1 : Image local Path 2 : HyperLink address///// 
             vocaData vocadata = new vocaData()
             {
-                Kind = 1,
-                Title = ocr.ToString().Substring(0, 15),
+                Kind = data.Spec,
+                Title = article.Substring(0, 15),
                 Date = DateTime.Now,
                 Translate = "en-kr",
                 Words = wordList,
 
-                Img = file.Path,
-                Article = lowerString,
-                Href = null
+                Path = data.Path,
+                Article = lowerArticle,
             };
             ////////////////// vocaData -> SQLvocaData ///////////////////
 
@@ -143,9 +120,8 @@ namespace Wordpedia_window_phone
                 Translate = vocadata.Translate,
                 JsonWords = json,
 
-                Img = vocadata.Img,
+                Path = vocadata.Path,
                 Article = vocadata.Article,
-                Href = vocadata.Href
             };
 
             ///////////////////SQLite DB 에 저장한다.//////////////////////
@@ -156,9 +132,16 @@ namespace Wordpedia_window_phone
             conn.CreateTable<SQLvocaData>();
             List<SQLvocaData> retrievedTasks = conn.Table<SQLvocaData>().ToList<SQLvocaData>();
             conn.Insert(sqlvocadata);
-
             conn.Close();
+
             this.Frame.Navigate(typeof(Vocabulary), vocadata);
         }
+    }
+
+    public class TransmitData
+    {
+        public int Spec { get; set; } ///// 1 : img   2 : HyperLink
+        public String Article { get; set; }
+        public String Path { get; set; } ////// img : Image Local Path    HyperLink : HTML Source Code
     }
 }

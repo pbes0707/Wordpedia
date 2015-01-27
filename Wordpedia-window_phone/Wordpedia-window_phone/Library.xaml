@@ -174,7 +174,7 @@
                 Margin="0,90,-35,0"
                 Width="100" Height="100"
                 VerticalAlignment="Top"
-                Style="{StaticResource RoundButtonStyle}"/>
+                Style="{StaticResource RoundButtonStyle}" Click="btn_search_Click"/>
         <Button x:Name="btn_capture"
                 Content="Cap"
                 HorizontalAlignment="Right"

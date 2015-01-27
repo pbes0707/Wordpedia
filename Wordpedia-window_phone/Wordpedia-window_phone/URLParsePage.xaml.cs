@@ -30,6 +30,7 @@ namespace Wordpedia_window_phone
     {
         private String targetURL;
         private HtmlDocument htmlData = null;
+        private TransmitData transData;
 
         public URLParsePage()
         {
@@ -79,15 +80,19 @@ namespace Wordpedia_window_phone
 
         private async void btnNextClick(object sender, RoutedEventArgs e)
         {
-            List<String> htmlList = new List<String>();
+            String strHTML = "";
             htmlData.LoadHtml(await web_ContentView.InvokeScriptAsync("eval", new string[] { "document.documentElement.outerHTML;" }));
 
             foreach (HtmlNode node in htmlData.DocumentNode.Descendants("clicked"))
             {
-                htmlList.Add(node.ParentNode.InnerHtml);
+                strHTML += node.ParentNode.InnerHtml;
             }
 
-            Frame.Navigate(typeof(TestPage), htmlList);
+            transData = new TransmitData();
+            transData.Spec = 2; //// HyperLink
+            transData.Path = ""; //// HTML Source Code
+            transData.Article = strHTML;
+            this.Frame.Navigate(typeof(CreateVocabulary), transData);
         }
 
         private void btnResetClick(object sender, RoutedEventArgs e)

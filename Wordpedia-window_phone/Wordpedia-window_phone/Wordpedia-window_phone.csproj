@@ -83,8 +83,11 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="OCRProcess.xaml.cs">
-      <DependentUpon>OCRProcess.xaml</DependentUpon>
+    <Compile Include="CreateVocabulary.xaml.cs">
+      <DependentUpon>CreateVocabulary.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="URLParsePage.xaml.cs">
+      <DependentUpon>URLParsePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Vocabulary.xaml.cs">
       <DependentUpon>Vocabulary.xaml</DependentUpon>
@@ -134,7 +137,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="OCRProcess.xaml">
+    <Page Include="CreateVocabulary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="URLParsePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -148,6 +155,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="HtmlAgilityPack">
+      <HintPath>..\packages\HtmlAgilityPack.1.4.9\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid+MonoTouch\HtmlAgilityPack.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Threading.Tasks">
       <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\wpa81\Microsoft.Threading.Tasks.dll</HintPath>
     </Reference>
