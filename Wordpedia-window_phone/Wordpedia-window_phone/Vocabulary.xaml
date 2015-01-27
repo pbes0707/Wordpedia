@@ -50,7 +50,7 @@
             x:Name="lv_words"
             Margin="0,360,0,0" 
             VerticalAlignment="Top"
-            Height="270">
+            Height="270" SelectionChanged="lv_words_SelectionChanged">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid Height="70" Margin="0">
@@ -58,7 +58,7 @@
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <StackPanel 
+                        <StackPanel x:Name="sp_Panel" 
                             Grid.Column="1" 
                             VerticalAlignment="Top"
                             Orientation="Vertical"

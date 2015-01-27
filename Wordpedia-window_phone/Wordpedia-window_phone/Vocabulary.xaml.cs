@@ -42,7 +42,16 @@ namespace Wordpedia_window_phone
             tb_Title.Text = t.Title;
             tb_Article.Text = t.Article;
 
-            lv_words.ItemsSource = t.Words;
+            var show_list = new List<wordData>();
+            foreach(wordData v in t.Words)
+            {
+                if( v.TranslateWord != "" 
+                    && v.Word != v.TranslateWord)
+                {
+                    show_list.Add(v);
+                }
+            }
+            lv_words.ItemsSource = show_list;
 
         }
 
@@ -63,6 +72,12 @@ namespace Wordpedia_window_phone
                 frame.Navigate(typeof(Library));
                 e.Handled = true;
             }
+        }
+
+        private void lv_words_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (lv_words.SelectedItems.Count == 0) return;
+            wordData v = lv_words.SelectedItems[0] as wordData;
         }
 
     }

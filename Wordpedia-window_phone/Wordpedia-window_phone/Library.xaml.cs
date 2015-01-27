@@ -61,7 +61,6 @@ namespace Wordpedia_window_phone
 
             vocalist = new List<vocaData>();
 
-
             string strConn = Path.Combine(Path.Combine(ApplicationData.Current.LocalFolder.Path, "Vocabulary.sqlite")); ;
 
             conn = new SQLiteConnection(strConn);
@@ -81,7 +80,6 @@ namespace Wordpedia_window_phone
                     Path = v.Path,
                     Article = v.Article,
                 };
-
                 vocalist.Add(data);
             }
 
@@ -209,7 +207,6 @@ namespace Wordpedia_window_phone
             if (frame.CanGoBack)
             {
                 return;
-                e.Handled = true;
             }
         }
 

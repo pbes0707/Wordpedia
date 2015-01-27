@@ -20,6 +20,7 @@ using SQLite;
 using Windows.Web.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using System.Text.RegularExpressions;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -35,11 +36,11 @@ namespace Wordpedia_window_phone
             this.InitializeComponent();
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             data = (TransmitData)e.Parameter;
 
-            Process(data.Article);
+           await Process(data.Article);
 
         }
         protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -48,12 +49,14 @@ namespace Wordpedia_window_phone
                 conn.Close();
         }
 
-        private void Process(String article)
+        private async Task Process(String article)
         {
             ////////////////////////////String Split/////////////////////////////
-            String lowerArticle = article.ToLower();
-            String[] separators = { ",", ".", "!", "?", ";", ":", " ", "\r", "\n", "\t" };
-            String[] words = lowerArticle.Split(separators, StringSplitOptions.RemoveEmptyEntries);
+            String transArticle = article.ToLower();
+            transArticle = Regex.Replace(transArticle, @"[^a-zA-Z0-9가-힣]", ",", RegexOptions.IgnoreCase);
+            String[] separators = { "," };
+            String[] words = transArticle.Split(separators, StringSplitOptions.RemoveEmptyEntries);
+
 
             ///////////////////////////List Create////////////////////////////////
             List<wordData> wordList = new List<wordData>();
@@ -76,7 +79,7 @@ namespace Wordpedia_window_phone
                     wordList.Add(new wordData(v, v));
             }
             /////////////////////Word Translate Request to Server/////////////
-            /*String url = "http://wordpedia.herokuapp.com/translate/g/ko?";
+            String url = "http://wordpedia.herokuapp.com/translate/v2/ko?";
             foreach(wordData v in wordList)
             {
                 if (wordList[0] != v)
@@ -84,17 +87,26 @@ namespace Wordpedia_window_phone
                 url += "w=" + v.Word;
             }
             Uri strUri = new Uri(url);
+            String ResponseString = "";
             try
             {
                 HttpClient httpClient = new HttpClient();
                 httpClient.DefaultRequestHeaders.Accept.TryParseAdd("application/json");
-                String ResponseString = await httpClient.GetStringAsync(strUri);
-                Dictionary<string, > jsonArray = JsonConvert.DeserializeObject(ResponseString);
+                ResponseString = await httpClient.GetStringAsync(strUri);
             }
             catch(Exception ex)
             {
 
-            }*/
+            }
+            Dictionary<string, string> jsonArray = JsonConvert.DeserializeObject<Dictionary<string, string>>(ResponseString);
+            foreach(KeyValuePair<string, string> v in jsonArray)
+            {
+                foreach(wordData c in wordList)
+                {
+                    if (c.Word == v.Key)
+                        c.TranslateWord = v.Value;
+                }
+            }
             //////////////////////Voca Data Create//////////////////////////
             ///////////Kind  1 : Image            2 : HyperLink/////////////
             ///////////Path  1 : Image local Path 2 : HyperLink address///// 
@@ -107,7 +119,7 @@ namespace Wordpedia_window_phone
                 Words = wordList,
 
                 Path = data.Path,
-                Article = lowerArticle,
+                Article = article,
             };
             ////////////////// vocaData -> SQLvocaData ///////////////////
 
@@ -132,6 +144,7 @@ namespace Wordpedia_window_phone
             conn.CreateTable<SQLvocaData>();
             List<SQLvocaData> retrievedTasks = conn.Table<SQLvocaData>().ToList<SQLvocaData>();
             conn.Insert(sqlvocadata);
+
             conn.Close();
 
             this.Frame.Navigate(typeof(Vocabulary), vocadata);
