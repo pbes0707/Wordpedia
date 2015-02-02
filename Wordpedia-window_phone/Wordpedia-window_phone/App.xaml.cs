@@ -7,8 +7,10 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.ApplicationModel.DataTransfer.ShareTarget;
+using Windows.Data.Xml.Dom;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Notifications;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -38,7 +40,6 @@ namespace Wordpedia_window_phone
         {
             this.InitializeComponent();
             this.Suspending += this.OnSuspending;
-
         }
         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points
@@ -98,6 +99,23 @@ namespace Wordpedia_window_phone
                     throw new Exception("Failed to create initial page");
                 }
             }
+
+            ToastTemplateType toastType = ToastTemplateType.ToastText02;
+
+            XmlDocument toastXml = ToastNotificationManager.GetTemplateContent(toastType);
+
+            XmlNodeList toastTextElement = toastXml.GetElementsByTagName("text");
+            //toastTextElement[0].AppendChild(toastXml.CreateTextNode("Hello C# Corner"));
+            //toastTextElement[1].AppendChild(toastXml.CreateTextNode("I am poping you from a Winmdows Phone App"));
+
+            IXmlNode toastNode = toastXml.SelectSingleNode("/toast");
+            ((XmlElement)toastNode).SetAttribute("duration", "long");
+
+            ToastNotification toast = new ToastNotification(toastXml);
+            toast.SuppressPopup = true;
+
+            ToastNotificationManager.History.Clear();
+            ToastNotificationManager.CreateToastNotifier().Show(toast);
 
             // Ensure the current window is active
             Window.Current.Activate();

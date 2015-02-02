@@ -79,9 +79,16 @@
                                 MaxHeight="40" />
 
                         </StackPanel>
+                            
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <MediaElement x:Name="media"
+                      HorizontalAlignment="Left"
+                      Height="100"
+                      VerticalAlignment="Top"
+                      AutoPlay="True"
+                      Width="100" MediaEnded="media_MediaEnded"/>
     </Grid>
 </Page>

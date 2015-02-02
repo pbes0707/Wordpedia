@@ -25,6 +25,9 @@ using Newtonsoft.Json;
 using Windows.Phone.UI.Input;
 using System.Text;
 using WindowsPreview.Media.Ocr;
+using Windows.UI.Popups;
+using Windows.UI.Notifications;
+using Windows.Data.Xml.Dom;
 
 namespace Wordpedia_window_phone
 {
@@ -39,13 +42,14 @@ namespace Wordpedia_window_phone
             this.InitializeComponent();
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             tb_search.Width = Window.Current.Bounds.Width - 130;
             lv_Voca.Height = Window.Current.Bounds.Height - 225;
 
             initialize();
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+
         }
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
@@ -84,8 +88,6 @@ namespace Wordpedia_window_phone
             }
 
             lv_Voca.ItemsSource = vocalist;
-            /////////////////////////////////////////////////////////////////
-
         }
 
         private void lv_CollectionList_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -139,8 +141,6 @@ namespace Wordpedia_window_phone
                     transData.Spec = 1;
                     /////////////////////////OCRActivate//////////////////////////
                     await OCRActivate(bitmap);
-
-                    this.Frame.Navigate(typeof(CreateVocabulary), transData);
                     return;
                 }
             }
@@ -158,6 +158,8 @@ namespace Wordpedia_window_phone
                                     "Loaded image size is " + bitmap.PixelWidth + "x" + bitmap.PixelHeight + "." +
                                     Environment.NewLine +
                                     "Supported image dimensions are between 40 and 2600 pixels.";
+                //MessageDialog msgbox = new MessageDialog(Text);
+                //await msgbox.ShowAsync();
 
                 return;
             }
@@ -187,14 +189,15 @@ namespace Wordpedia_window_phone
                     }
                     ocr.AppendLine(newLine);
                 }
+                transData.Article = ocr.ToString();
+                this.Frame.Navigate(typeof(CreateVocabulary), transData);
             }
-            if (ocr.ToString().Length == 0)
+            else
             {
                 ///////////No Vocabulary/////////////
-                this.Frame.Navigate(typeof(Library));
-                return;
+                var dialog = new MessageDialog("No Vocabulary in Picture");
+                await dialog.ShowAsync();
             }
-            transData.Article = ocr.ToString();
         }
         private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
         {
@@ -215,9 +218,9 @@ namespace Wordpedia_window_phone
             //////////////////Search ///////////////////
             String query = tb_search.Text;
             List<vocaData> search_vocalist = new List<vocaData>();
-            foreach(vocaData v in vocalist)
+            foreach (vocaData v in vocalist)
             {
-                if(v.Title.Contains(query)
+                if (v.Title.Contains(query)
                     || v.Date.ToString().Contains(query))
                     search_vocalist.Add(v);
             }

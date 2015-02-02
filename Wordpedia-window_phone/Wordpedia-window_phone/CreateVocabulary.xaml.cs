@@ -56,6 +56,12 @@ namespace Wordpedia_window_phone
             transArticle = Regex.Replace(transArticle, @"[^a-zA-Z0-9가-힣]", ",", RegexOptions.IgnoreCase);
             String[] separators = { "," };
             String[] words = transArticle.Split(separators, StringSplitOptions.RemoveEmptyEntries);
+            
+            if(words.Length == 0)
+            {
+                this.Frame.Navigate(typeof(Library));
+                return;
+            }
 
 
             ///////////////////////////List Create////////////////////////////////
@@ -96,7 +102,6 @@ namespace Wordpedia_window_phone
             }
             catch(Exception ex)
             {
-
             }
             Dictionary<string, string> jsonArray = JsonConvert.DeserializeObject<Dictionary<string, string>>(ResponseString);
             foreach(KeyValuePair<string, string> v in jsonArray)
@@ -109,11 +114,14 @@ namespace Wordpedia_window_phone
             }
             //////////////////////Voca Data Create//////////////////////////
             ///////////Kind  1 : Image            2 : HyperLink/////////////
-            ///////////Path  1 : Image local Path 2 : HyperLink address///// 
+            ///////////Path  1 : Image local Path 2 : HyperLink address/////
+            int substring_length = 15;
+            if (article.Length < 15)
+                substring_length = article.Length;
             vocaData vocadata = new vocaData()
             {
                 Kind = data.Spec,
-                Title = article.Substring(0, 15),
+                Title = article.Substring(0, substring_length),
                 Date = DateTime.Now,
                 Translate = "en-kr",
                 Words = wordList,

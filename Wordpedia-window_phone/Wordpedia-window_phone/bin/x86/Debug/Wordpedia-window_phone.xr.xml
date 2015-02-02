@@ -199,6 +199,14 @@
       <RootProperty Name="Width" />
     </RootType>
     <RootType FullName="Wordpedia_window_phone.URLParsePage" />
+    <RootType FullName="Windows.UI.Xaml.Controls.MediaElement">
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="Height" />
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="AutoPlay" />
+      <RootProperty Name="Width" />
+      <RootEvent Name="MediaEnded" />
+    </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ScrollViewer">
       <RootProperty Name="Name" />
       <RootProperty Name="Content" />

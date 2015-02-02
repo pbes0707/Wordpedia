@@ -97,7 +97,7 @@ namespace Wordpedia_window_phone
                 Regex regex = new Regex("<[^>]*>", RegexOptions.IgnoreCase);
                 String result = regex.Replace(htmlContent, "");
                 result = result.Replace("\n", "");
-                if (!result.Trim().Equals("") )//&& !strHTML.Contains(result))
+                if (!result.Trim().Equals("") && !strHTML.Contains(result))
                 {
                     strHTML += result;
                     strHTML += "\n";

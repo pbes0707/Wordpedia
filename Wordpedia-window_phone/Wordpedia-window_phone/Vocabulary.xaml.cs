@@ -78,6 +78,15 @@ namespace Wordpedia_window_phone
         {
             if (lv_words.SelectedItems.Count == 0) return;
             wordData v = lv_words.SelectedItems[0] as wordData;
+
+            ////////////////Google TTS API//////////////////
+            String mp3Url = "http://translate.google.com/translate_tts?tl=en&q=";
+            mp3Url += v.Word;
+            media.Source = new Uri(mp3Url);
+        }
+
+        private void media_MediaEnded(object sender, RoutedEventArgs e)
+        {
         }
 
     }
