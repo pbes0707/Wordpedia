@@ -33,6 +33,7 @@ namespace Wordpedia_window_phone
 {
     public sealed partial class Library : Page
     {
+        static public bool act_picture = false;
         private SQLiteConnection conn;
         private TransmitData transData;
         private List<vocaData> vocalist;
@@ -41,21 +42,21 @@ namespace Wordpedia_window_phone
         {
             this.InitializeComponent();
         }
-
-        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             tb_search.Width = Window.Current.Bounds.Width - 130;
             lv_Voca.Height = Window.Current.Bounds.Height - 225;
 
             initialize();
-            HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+
+            if (act_picture)
+                btn_capture_Click(new object(), new RoutedEventArgs());
 
         }
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             if (conn != null)
                 conn.Close();
-            HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
         }
 
         private void initialize()
@@ -197,19 +198,6 @@ namespace Wordpedia_window_phone
                 ///////////No Vocabulary/////////////
                 var dialog = new MessageDialog("No Vocabulary in Picture");
                 await dialog.ShowAsync();
-            }
-        }
-        private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
-        {
-            Frame frame = Window.Current.Content as Frame;
-            if (frame == null)
-            {
-                return;
-            }
-
-            if (frame.CanGoBack)
-            {
-                return;
             }
         }
 

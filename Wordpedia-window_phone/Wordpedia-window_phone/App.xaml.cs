@@ -49,6 +49,10 @@ namespace Wordpedia_window_phone
         /// <param name="e">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
+            if(e.Arguments.Equals("picture"))
+            {
+                Library.act_picture = true;
+            }
 #if DEBUG
             if (System.Diagnostics.Debugger.IsAttached)
             {
@@ -59,7 +63,7 @@ namespace Wordpedia_window_phone
 
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active
-            if (rootFrame == null)
+            if (rootFrame == null || Library.act_picture == true)
             {
                 // Create a Frame to act as the navigation context and navigate to the first page
                 rootFrame = new Frame();
@@ -110,6 +114,7 @@ namespace Wordpedia_window_phone
 
             IXmlNode toastNode = toastXml.SelectSingleNode("/toast");
             ((XmlElement)toastNode).SetAttribute("duration", "long");
+            ((XmlElement)toastNode).SetAttribute("launch", "picture");
 
             ToastNotification toast = new ToastNotification(toastXml);
             toast.SuppressPopup = true;
