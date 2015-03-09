@@ -43,6 +43,10 @@
     <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\Assets\back.png">
       <PackagePath>Assets\back.png</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\Assets\BadgeLogo.scale-240.png">
+      <PackagePath>Assets\BadgeLogo.scale-240.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\Assets\Logo.scale-240.png">
       <PackagePath>Assets\Logo.scale-240.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
@@ -58,6 +62,14 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\Assets\SmallLogo.scale-240.png">
       <PackagePath>Assets\SmallLogo.scale-240.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\Assets\SplashScreen.scale-100.png">
+      <PackagePath>Assets\SplashScreen.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\Assets\SplashScreen.scale-140.png">
+      <PackagePath>Assets\SplashScreen.scale-140.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\Assets\SplashScreen.scale-240.png">

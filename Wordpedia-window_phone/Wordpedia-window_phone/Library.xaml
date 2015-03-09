@@ -98,7 +98,7 @@
         <Grid 
             Height="63" 
             VerticalAlignment="Top" 
-            Background="#0067db">
+            Background="#33cc99">
 
             <TextBlock
                 HorizontalAlignment="Left"
@@ -107,7 +107,7 @@
                 Foreground="White"
                 VerticalAlignment="Center"
                 TextAlignment="Center"
-                FontSize="30"/>
+                FontSize="30" Margin="16,14,0,13"/>
         </Grid>
         <ListView 
             x:Name="lv_Voca"
@@ -164,11 +164,6 @@
                  Background="#3a3a3b"
                  BorderBrush="#3a3a3b"
                  VerticalAlignment="Top" TextAlignment="Right" TextWrapping="Wrap" FontSize="30" Width="270" SelectionHighlightColor="#FF0068FF" Foreground="#FF00DFFF"/>
-        <Image x:Name="img_search"
-               HorizontalAlignment="Left"
-               Height="60" Width="60"
-               Margin="0,113,0,0" 
-               VerticalAlignment="Top" Source="Assets/Logo.png"/>
         <Button x:Name="btn_search" 
                 Content="Search" 
                 HorizontalAlignment="Right"

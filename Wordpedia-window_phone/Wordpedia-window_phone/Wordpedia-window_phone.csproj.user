@@ -4,9 +4,12 @@
     <DeviceId>A6BAF594-9315-40C3-AD16-F5B8A425A7AB</DeviceId>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
-    <DeviceId>184901A8-DC44-4CED-869E-DC7733D048D6</DeviceId>
+    <DeviceId>30F105C9-681E-420b-A277-7C086EAD8A4E</DeviceId>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
-    <DeviceId>D363CCA4-0764-4F2C-9EE1-12E55E13C0FC</DeviceId>
+    <DeviceId>30F105C9-681E-420b-A277-7C086EAD8A4E</DeviceId>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
+    <DeviceId>57B0267A-6444-41EB-9127-2ED594284A2D</DeviceId>
   </PropertyGroup>
 </Project>

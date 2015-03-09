@@ -32,7 +32,7 @@ namespace Wordpedia_window_phone
         {
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
             vocaData t = (vocaData)e.Parameter;
-
+            
             initialize(t);
         }
 
