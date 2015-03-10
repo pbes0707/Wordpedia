@@ -281,7 +281,6 @@ namespace Wordpedia_windows
         }
         private async void loadLibraryList()
         {
-            
             string url = "http://wordpedia.herokuapp.com/get/collection/user";
             System.Net.WebRequest request = WebRequest.Create(url);
             request.Method = "POST";
