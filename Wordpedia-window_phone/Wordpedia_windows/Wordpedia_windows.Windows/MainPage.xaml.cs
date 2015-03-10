@@ -86,8 +86,6 @@ namespace Wordpedia_windows
 
         }
 
-
-
         private void lv_navigation_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (lv_navigation.SelectedItems.Count == 0) return;
@@ -99,7 +97,7 @@ namespace Wordpedia_windows
                 {
                     case 1:
                         ChangeGridVisibility(Grid_UserEmail, Visibility.Visible, true);
-                        if (isLogin) //ID 토큰이 해당 기기에 존재할 경우
+                        if (isLogin) //로그인이 되 있을 경우
                         {
                             ChangeGridVisibility(Grid_UserEmail_isLogin, Visibility.Visible);
                         }
@@ -109,12 +107,17 @@ namespace Wordpedia_windows
                         }
                         break;
                     case 2:
+                        if (isLogin == false) break;
+                        loadLibraryList();
+
                         ChangeGridVisibility(Grid_Library, Visibility.Visible, true);
                         ChangeGridVisibility(Grid_Library_list, Visibility.Visible);
                         break;
                     case 3:
+                        if (isLogin == false) break;
                         break;
                     case 4:
+                        if (isLogin == false) break;
                         break;
                 }
                 prev_navItem = v.Copy();
@@ -205,11 +208,11 @@ namespace Wordpedia_windows
                     Dictionary<string, string> jsonArray =
                         JsonConvert.DeserializeObject<Dictionary<string, string>>(responseString);
                     String state;
-                    if (jsonArray.ContainsKey("resultMessage") == true && jsonArray["resultMessage"].Equals("로그인에 성공했습니다."))
+                    if (jsonArray.ContainsKey("requestMessage") == true && jsonArray["requestMessage"].Equals("로그인에 성공했습니다."))
                     {
                         state = "SUCCESS";
-                        String _id = jsonArray["id"].ToString();
-                        String _passwd = tbx_login_passwd.Password;
+                        String _id = _ID;
+                        String _passwd = _pw;
                         String _token = jsonArray["token"].ToString();
 
                         Windows.Storage.ApplicationDataContainer localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
@@ -234,7 +237,7 @@ namespace Wordpedia_windows
                         state = "ERROR";
 
                     }
-                    MessageDialog msg = new MessageDialog(responseString, state);
+                    MessageDialog msg = new MessageDialog(jsonArray["requestMessage"].ToString(), state);
                     if(show==true) await msg.ShowAsync();
                 }
             }
@@ -274,6 +277,54 @@ namespace Wordpedia_windows
             }
             catch (Exception)
             {
+            }
+        }
+        private async void loadLibraryList()
+        {
+            
+            string url = "http://wordpedia.herokuapp.com/get/collection/user";
+            System.Net.WebRequest request = WebRequest.Create(url);
+            request.Method = "POST";
+            Windows.Storage.ApplicationDataContainer localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+            request.Headers["token"] = localSettings.Values["token"].ToString();
+
+            try
+            {
+                WebResponse response = await request.GetResponseAsync();
+                using (Stream stream = response.GetResponseStream())
+                {
+                    StreamReader reader = new StreamReader(stream, Encoding.UTF8);
+                    String responseString = reader.ReadToEnd();
+                    userData _userData =
+                        JsonConvert.DeserializeObject<userData>(responseString);
+                }
+            }
+            catch(Exception)
+            {
+
+            }
+        }
+        private async void createVocabulrary()
+        {
+
+            string url = "http://wordpedia.herokuapp.com/collection/create?";
+            System.Net.WebRequest request = WebRequest.Create(url);
+            request.Method = "POST";
+            Windows.Storage.ApplicationDataContainer localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+            request.Headers["token"] = localSettings.Values["token"].ToString();
+
+            try
+            {
+                WebResponse response = await request.GetResponseAsync();
+                using (Stream stream = response.GetResponseStream())
+                {
+                    StreamReader reader = new StreamReader(stream, Encoding.UTF8);
+                    String responseString = reader.ReadToEnd();
+                }
+            }
+            catch (Exception)
+            {
+
             }
         }
     }

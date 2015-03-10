@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Wordpedia_windows
 {
-    class wordData
+    class temp_wordData
     {
-        public wordData(String _word, String _translateWord)
+        public temp_wordData(String _word, String _translateWord)
         {
             OriginalWord = _word;
             TranslateWord = _translateWord;

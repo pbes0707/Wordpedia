@@ -111,8 +111,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SQLite.cs" />
     <Compile Include="SQLiteAsync.cs" />
+    <Compile Include="temp_vocaData.cs" />
+    <Compile Include="temp_wordData.cs" />
     <Compile Include="vocaData.cs" />
-    <Compile Include="wordData.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
