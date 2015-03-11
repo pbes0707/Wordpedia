@@ -155,15 +155,15 @@
             <Grid Name="Grid_Library_voca" Visibility="Collapsed">
                 <Grid Margin="689,0,0,554">
                     <TextBlock Name="tb_Library_title" Text="Title"
-                               FontSize="50" FontFamily="Franklin Gothic Book" Margin="64,95,28,56"/>
+                               FontSize="50" FontFamily="Franklin Gothic Book" Margin="64,95,28,56" FontWeight="Bold"/>
                     <TextBlock Name="tb_Library_createDate" Text="createDate"
                                FontSize="35" FontFamily="Franklin Gothic Book" Margin="64,151,105,0"
                                FontStyle="Italic" FontWeight="Light"/>
                     <TextBlock Name="tb_Library_translate" Text="Trans"
-                               FontSize="35" FontFamily="Franklin Gothic Book" Margin="277,151,12,13"/>
+                               FontSize="35" FontFamily="Bebas Neue Light" Margin="277,151,12,13" Foreground="#FF33CC99"/>
                 </Grid>
                 <ListView Name="lv_Library_word" HorizontalAlignment="Left" Height="554"
-                          VerticalAlignment="Top" Width="381" Margin="689,214,-4,0">
+                          VerticalAlignment="Top" Width="381" Margin="689,214,-4,0" SelectionChanged="lv_Library_word_SelectionChanged">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Grid Height="60" Background="{x:Null}">
@@ -196,6 +196,7 @@
                 <ComboBox x:Name="cbx_createVoca_ocrlanguage" ItemsSource="{Binding Language}" FontSize="30"  Margin="437,324,305,383" SelectionChanged="cbx_createVoca_language_SelectionChanged"/>
             </Grid>
         </Grid>
+        <MediaElement Name="me_music" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" AudioCategory="SoundEffects"/>
     </Grid>
 
 </Page>

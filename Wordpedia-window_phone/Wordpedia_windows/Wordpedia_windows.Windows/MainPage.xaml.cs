@@ -152,6 +152,7 @@ namespace Wordpedia_windows
                 }
                 prev_navItem = v.Copy();
             }
+            lv_navigation.SelectedItem = null;
         }
         void ChangeGridVisibility(Grid grid, Visibility visible, bool other = false)
         {
@@ -550,6 +551,18 @@ namespace Wordpedia_windows
         private void cbx_createVoca_language_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void lv_Library_word_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (lv_Library_word.SelectedItems.Count == 0) return;
+            Word v = lv_Library_word.SelectedItems[0] as Word;
+
+            String uri = "http://translate.google.com/translate_tts?tl=en&q=" + v.word;
+            if(me_music.Source != new Uri(uri))me_music.Source = new Uri(uri);
+            else me_music.Play();
+
+            lv_Library_word.SelectedItem = null;
         }
 
     }
