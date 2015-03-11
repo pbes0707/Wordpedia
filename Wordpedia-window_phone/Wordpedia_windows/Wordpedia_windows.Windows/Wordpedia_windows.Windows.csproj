@@ -17,7 +17,7 @@
     <SynthesizeLinkMetadata>true</SynthesizeLinkMetadata>
     <ProjectTypeGuids>{BC8A1FFA-BEE3-4634-8014-F334798102B3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <PackageCertificateKeyFile>Wordpedia_windows.Windows_TemporaryKey.pfx</PackageCertificateKeyFile>
-    <NuGetPackageImportStamp>16733f0b</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>47f5131f</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -113,20 +113,51 @@
     <Compile Include="SQLiteAsync.cs" />
     <Compile Include="temp_vocaData.cs" />
     <Compile Include="temp_wordData.cs" />
-    <Compile Include="vocaData.cs" />
+    <Compile Include="Data.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <None Include="OcrResources\MsOcrRes.orp" />
     <None Include="packages.config" />
     <None Include="Wordpedia_windows.Windows_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Library\Choose_launguage.png" />
+    <Content Include="Assets\Library\Choose_launguage_off.png" />
+    <Content Include="Assets\Library\Choose_month.png" />
+    <Content Include="Assets\Library\Choose_month_off.png" />
+    <Content Include="Assets\Library\Choose_year.png" />
+    <Content Include="Assets\Library\Choose_year_off.png" />
+    <Content Include="Assets\Library\Library_book_BG.png" />
+    <Content Include="Assets\Library\Library_book_cover.png" />
+    <Content Include="Assets\Library\Library_book_quotation.png" />
+    <Content Include="Assets\Library\Library_comment_icon.png" />
+    <Content Include="Assets\Library\navigation bar.png" />
+    <Content Include="Assets\Library\navigation icon.png" />
+    <Content Include="Assets\Library\Recommend_BG.png" />
+    <Content Include="Assets\Library\Recommend_book_BG.png" />
+    <Content Include="Assets\Library\Recommend_book_cover.png" />
+    <Content Include="Assets\Library\Recommend_icon.png" />
+    <Content Include="Assets\Library\Recommend_voca.png" />
+    <Content Include="Assets\Library\Vocabulary\meaning_icon.png" />
+    <Content Include="Assets\Library\Vocabulary\speaking_icon.png" />
+    <Content Include="Assets\Library\Vocabulary\vacabulary_icon.png" />
     <Content Include="Assets\Logo.scale-100.png" />
+    <Content Include="Assets\Navigation\library_icon.png" />
+    <Content Include="Assets\Navigation\stats_icon.png" />
+    <Content Include="Assets\Navigation\surf_icon.png" />
+    <Content Include="Assets\Navigation\user_icon.png" />
     <Content Include="Assets\SmallLogo.scale-100.png" />
     <Content Include="Assets\SplashScreen.scale-100.png" />
     <Content Include="Assets\StoreLogo.scale-100.png" />
+    <Content Include="Assets\Usermail\Email icon.png" />
+    <Content Include="Assets\Usermail\Email.png" />
+    <Content Include="Assets\Usermail\log_in.png" />
+    <Content Include="Assets\Usermail\password.png" />
+    <Content Include="Assets\Usermail\password_Email bar.png" />
+    <Content Include="Assets\Usermail\sign_in.png" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="MainPage.xaml">
@@ -140,6 +171,9 @@
     </Reference>
     <Reference Include="SQLiteWinRT">
       <HintPath>..\..\packages\Sqlite-Winrt.3.8.7.1\lib\netcore45\SQLiteWinRT.winmd</HintPath>
+    </Reference>
+    <Reference Include="WindowsPreview.Media.Ocr">
+      <HintPath>..\..\packages\Microsoft.Windows.Ocr.1.0.0\lib\win81\x86\WindowsPreview.Media.Ocr.winmd</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -167,8 +201,10 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\..\packages\Sqlite-Winrt.3.8.7.1\build\netcore45\Sqlite-Winrt.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Sqlite-Winrt.3.8.7.1\build\netcore45\Sqlite-Winrt.props'))" />
     <Error Condition="!Exists('..\..\packages\Sqlite-Winrt.3.8.7.1\build\netcore45\Sqlite-Winrt.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Sqlite-Winrt.3.8.7.1\build\netcore45\Sqlite-Winrt.targets'))" />
+    <Error Condition="!Exists('..\..\packages\Microsoft.Windows.Ocr.1.0.0\build\win81\Microsoft.Windows.Ocr.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.Windows.Ocr.1.0.0\build\win81\Microsoft.Windows.Ocr.targets'))" />
   </Target>
   <Import Project="..\..\packages\Sqlite-Winrt.3.8.7.1\build\netcore45\Sqlite-Winrt.targets" Condition="Exists('..\..\packages\Sqlite-Winrt.3.8.7.1\build\netcore45\Sqlite-Winrt.targets')" />
+  <Import Project="..\..\packages\Microsoft.Windows.Ocr.1.0.0\build\win81\Microsoft.Windows.Ocr.targets" Condition="Exists('..\..\packages\Microsoft.Windows.Ocr.1.0.0\build\win81\Microsoft.Windows.Ocr.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

@@ -7,101 +7,83 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="#262626">
 
         <Grid x:Name="Grid_Navigation"
               HorizontalAlignment="Left"
               Height="768" Width="300"
               VerticalAlignment="Top"
-              Background="Blue">
-            <ListView x:Name="lv_navigation" HorizontalAlignment="Left" Height="748" VerticalAlignment="Top" Width="290" Margin="10" SelectionChanged="lv_navigation_SelectionChanged">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Grid Height="100">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="1"  
-                            Text="{Binding Text}"
-                            FontSize="40"
-                            VerticalAlignment="Center"/>
-                    </Grid>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+              Background="#33cc99">
+            <ListView x:Name="lv_navigation" 
+                      HorizontalAlignment="Left" Height="748"
+                      VerticalAlignment="Top" Width="290" 
+                      Margin="10"
+                      SelectionChanged="lv_navigation_SelectionChanged">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Height="100" Background="{x:Null}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="1"  
+                                Text="{Binding Text}"
+                                FontSize="40"
+                                VerticalAlignment="Center" />
+                            <Image Grid.Column="0"
+                                Source="{Binding ImgSrc}"
+                                   Width="50" Height="50" Margin="10"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </Grid>
-
         <Grid Name="Grid_UserEmail" Visibility="Collapsed"
             HorizontalAlignment="Left"
               Height="768" VerticalAlignment="Top" Width="1066" Margin="300,0,0,0">
 
 
-            <Grid Name="Grid_UserEmail_regist" Visibility="Collapsed">
-                <TextBlock Name="tb_regist_title" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Regist" FontSize="50" VerticalAlignment="Top" Margin="452,130,0,0"/>
+            <Grid Name="Grid_UserEmail_LoginRegist" Visibility="Collapsed">
 
-                <TextBox Name="tbx_regist_ID"
-            HorizontalAlignment="Left" 
-            TextWrapping="Wrap" Text="ID" FontSize="40"
-            VerticalAlignment="Top" Margin="255,240,0,0" Height="80" Width="565"/>
+                <Image Source="Assets/Usermail/Email icon.png" Margin="160,37,206,635"></Image>
+                <TextBox Name="tbx_loginregist_ID"
+            HorizontalAlignment="Left" PlaceholderText="ID"
+            TextWrapping="Wrap" Text="" FontSize="40"
+            VerticalAlignment="Top" Margin="207,240,0,0" 
+                         Height="80" Width="668" BorderBrush="{x:Null}" TextChanged="tbx_loginregist_ID_TextChanged">
+                    <TextBox.Background>
+                        <ImageBrush Stretch="Fill" ImageSource="Assets/Usermail/password_Email bar.png"/>
+                    </TextBox.Background>
+                </TextBox>
 
-                <PasswordBox Name="tbx_regist_passwd"
+                <PasswordBox Name="tbx_loginregist_passwd"
+                FontSize="40"
+                HorizontalAlignment="Left" PlaceholderText="123456"
+                Margin="207,342,0,0" VerticalAlignment="Top"
+                Height="80" Width="668" BorderBrush="{x:Null}">
+                    <PasswordBox.Background>
+                        <ImageBrush Stretch="Fill" ImageSource="Assets/Usermail/password_Email bar.png"/>
+                    </PasswordBox.Background>
+                </PasswordBox>
+                <Button Name="btn_loginregist_signin"
                 FontSize="40"
                 HorizontalAlignment="Left"
-                Margin="255,345,0,0" VerticalAlignment="Top"
-                Height="80" Width="565"/>
+                VerticalAlignment="Top" Margin="206,460,0,0" 
+                Height="78" Width="320" Click="btn_loginregist_signin_Click" BorderBrush="{x:Null}" Foreground="{x:Null}">
+                    <Button.Background>
+                        <ImageBrush Stretch="Uniform" ImageSource="Assets/Usermail/sign_in.png"/>
+                    </Button.Background>
+                </Button>
 
-                <Button Name="btn_regist_signin"
-                Content="Sign In" FontSize="40"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top" Margin="390,469,0,0" 
-                Height="78" Width="267" Click="btn_regist_signin_Click"/>
-
-                <TextBlock
-                HorizontalAlignment="Left" 
-                TextWrapping="Wrap" Text="If you have ID," FontSize="40" VerticalAlignment="Top" Margin="322,617,0,0"/>
-
-                <Button Name="btn_regist_login"
-                Content="Log in"
-                    FontSize="25" 
-                    HorizontalAlignment="Left" 
-                    VerticalAlignment="Top" Margin="590,614,0,0" 
-                    Height="54" Width="152" Click="btn_regist_login_Click"/>
-            </Grid>
-
-            <Grid Name="Grid_UserEmail_login" Visibility="Collapsed">
-                <TextBlock Name="tb_login_title" HorizontalAlignment="Left"
-                           TextWrapping="Wrap" Text="Login for Wordpedia" FontSize="50" VerticalAlignment="Top" Margin="308,148,0,0"/>
-
-                <TextBox Name="tbx_login_ID"
-            HorizontalAlignment="Left" 
-            TextWrapping="Wrap" Text="ID" FontSize="40"
-            VerticalAlignment="Top" Margin="255,240,0,0" Height="80" Width="565"/>
-
-                <PasswordBox Name="tbx_login_passwd"
+                <Button Name="btn_loginregist_confirm"
                 FontSize="40"
                 HorizontalAlignment="Left"
-                Margin="255,345,0,0" VerticalAlignment="Top"
-                Height="80" Width="565"/>
-
-                <Button Name="btn_login_confirm"
-                Content="Login" FontSize="40"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top" Margin="390,469,0,0" 
-                Height="78" Width="267" Click="btn_login_confirm_Click"/>
-
-                <TextBlock
-                HorizontalAlignment="Left" 
-                TextWrapping="Wrap" Text="You don't have ID,"
-                    FontSize="40" VerticalAlignment="Top" Margin="289,617,0,0"/>
-
-                <Button Name="btn_login_regist"
-                Content="Sign up"
-                    FontSize="25" 
-                    HorizontalAlignment="Left" 
-                    VerticalAlignment="Top" Margin="615,614,0,0" 
-                    Height="54" Width="152" Click="btn_login_regist_Click"/>
-
+                VerticalAlignment="Top" Margin="556,460,0,0" 
+                Height="78" Width="320" Click="btn_loginregist_confirm_Click" BorderBrush="{x:Null}">
+                    <Button.Background>
+                        <ImageBrush Stretch="Uniform" ImageSource="Assets/Usermail/log_in.png"/>
+                    </Button.Background>
+                </Button>
             </Grid>
 
             <Grid Name="Grid_UserEmail_isLogin" Visibility="Collapsed">
@@ -121,12 +103,99 @@
         <Grid Name="Grid_Library" Visibility="Collapsed"
             HorizontalAlignment="Left"
               Height="768" VerticalAlignment="Top" Width="1066" Margin="300,0,0,0">
-           
-            <Grid Name="Grid_Library_list" Visibility="Visible">
-            
+
+            <Grid Name="Grid_Library_list" Visibility="Collapsed">
+                <GridView Name="lv_voca"
+                          VerticalAlignment="Center" HorizontalAlignment="Left" 
+                          VerticalContentAlignment="Top" ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionChanged="lv_voca_SelectionChanged">
+                    <GridView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Height="500" Background="{x:Null}">
+                                <Image
+                                    Source="Assets/Library/Library_book_BG.png"
+                                   Width="300" Height="423" Margin="0,0,0,0"/>
+                                <Image
+                                    Source="Assets/Library/Library_book_cover.png"
+                                   Width="300" Height="150" Margin="0,0,0,350"/>
+                                <TextBlock 
+                                Text="{Binding title}"
+                                FontSize="20"
+                                VerticalAlignment="Center" Margin="10,0,0,390" 
+                                    FontFamily="Franklin Gothic Book"/>
+                                <TextBlock 
+                                Text="{Binding createDate}"
+                                FontSize="20"
+                                VerticalAlignment="Center" Margin="10,0,0,310"
+                                    FontFamily="Gill Sans Std" FontWeight="Light" FontStyle="Italic"/>
+                                <TextBlock 
+                                Text="{Binding fullTranslate}"
+                                FontSize="20"
+                                VerticalAlignment="Center" Margin="120,0,0,310"/>
+
+                            </Grid>
+                        </DataTemplate>
+                    </GridView.ItemTemplate>
+                </GridView>
+                <SearchBox Name="sb_search"
+                HorizontalAlignment="Left" FontSize="25"
+                       Margin="673,25,0,0" VerticalAlignment="Top"
+                       Height="50" Width="362" SuggestionsRequested="sb_search_SuggestionsRequested" QuerySubmitted="sb_search_QuerySubmitted">
+                    <SearchBox.Background>
+                        <ImageBrush Stretch="Fill" 
+                                ImageSource="Assets/Library/navigation bar.png"/>
+                    </SearchBox.Background>
+                </SearchBox>
+                <Button Name="btn_capture"
+                    Content="Capture" FontSize="40"
+                        HorizontalAlignment="Left" Margin="7,7,0,0"
+                        VerticalAlignment="Top" Height="91" Width="212" 
+                        Click="btn_capture_Click"/>
             </Grid>
-            
+
+            <Grid Name="Grid_Library_voca" Visibility="Collapsed">
+                <Grid Margin="689,0,0,554">
+                    <TextBlock Name="tb_Library_title" Text="Title"
+                               FontSize="50" FontFamily="Franklin Gothic Book" Margin="64,95,28,56"/>
+                    <TextBlock Name="tb_Library_createDate" Text="createDate"
+                               FontSize="35" FontFamily="Franklin Gothic Book" Margin="64,151,105,0"
+                               FontStyle="Italic" FontWeight="Light"/>
+                    <TextBlock Name="tb_Library_translate" Text="Trans"
+                               FontSize="35" FontFamily="Franklin Gothic Book" Margin="277,151,12,13"/>
+                </Grid>
+                <ListView Name="lv_Library_word" HorizontalAlignment="Left" Height="554"
+                          VerticalAlignment="Top" Width="381" Margin="689,214,-4,0">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Height="60" Background="{x:Null}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0"
+                                           Text="{Binding word}"
+                                           FontSize="40"/>
+                                <TextBlock Grid.Column="1"
+                                           Text="{Binding translateWord}" 
+                                           FontSize="40" Margin="20,0,0,0"/>
+
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+
+            <Grid Name="Grid_Library_createVoca" Visibility="Collapsed">
+                <TextBlock Text="Create Vocabulary" FontSize="65" Margin="57,34,446,637"/>
+                <TextBlock Text="Vocabulary Title" FontSize="30" Margin="57,150,685,580"/>
+                <TextBox Name="tbx_createVoca_title" FontSize="30" PlaceholderText="Title" Margin="57,191,685,515"/>
+                <TextBlock Text="Language to be translated" FontSize="30" Margin="57,272,655,458"/>
+                <ComboBox Name="cbx_createVoca_language" ItemsSource="{Binding}" FontSize="30"  Margin="57,324,685,383" SelectionChanged="cbx_createVoca_language_SelectionChanged"/>
+                <Button Name="btn_create_vocabulary" Content="Create" FontSize="40" HorizontalAlignment="Left" Margin="725,613,0,0" VerticalAlignment="Top" Height="77" Width="208" Click="btn_create_vocabulary_Click"/>
+                <TextBlock Text="OCR Article Language" FontSize="30" Margin="437,272,284,458"/>
+                <ComboBox x:Name="cbx_createVoca_ocrlanguage" ItemsSource="{Binding Language}" FontSize="30"  Margin="437,324,305,383" SelectionChanged="cbx_createVoca_language_SelectionChanged"/>
+            </Grid>
         </Grid>
     </Grid>
-    
+
 </Page>
