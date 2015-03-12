@@ -154,6 +154,7 @@
 
             <Grid Name="Grid_Library_voca" Visibility="Collapsed">
                 <Grid Margin="689,0,0,554">
+                    <Image Name="img_Library_Article" Margin="-688,5,383,-560"/>
                     <TextBlock Name="tb_Library_title" Text="Title"
                                FontSize="50" FontFamily="Franklin Gothic Book" Margin="64,95,28,56" FontWeight="Bold"/>
                     <TextBlock Name="tb_Library_createDate" Text="createDate"
@@ -195,6 +196,18 @@
                 <TextBlock Text="OCR Article Language" FontSize="30" Margin="437,272,284,458"/>
                 <ComboBox x:Name="cbx_createVoca_ocrlanguage" ItemsSource="{Binding Language}" FontSize="30"  Margin="437,324,305,383" SelectionChanged="cbx_createVoca_language_SelectionChanged"/>
             </Grid>
+        </Grid>
+        <Grid Name="Grid_Surf" Visibility="Visible"
+            HorizontalAlignment="Left"
+              Height="768" VerticalAlignment="Top" Width="1066" Margin="300,0,0,0">
+            <Button Name="btn_surf" Content="Surf" HorizontalAlignment="Left" Margin="7,677,0,0"
+                    VerticalAlignment="Top" Height="84" Width="158"
+                    FontSize="50" Click="btn_surf_Click"/>
+            <Button Name="btn_copy" Content="Copy" HorizontalAlignment="Left" Margin="186,677,0,0"
+            	VerticalAlignment="Top" Height="84" Width="158"
+            	FontSize="50" Click="btn_copy_Click"/>
+            <TextBlock Name="tbx_surf_creator" Text="Creator : " FontSize="50" Margin="10,613,538,93"/>
+
         </Grid>
         <MediaElement Name="me_music" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" AudioCategory="SoundEffects"/>
     </Grid>

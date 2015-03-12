@@ -7,7 +7,7 @@ using SQLite;
 
 namespace Wordpedia_window_phone
 {
-    class vocaData
+    class temp_vocaData
     {
         public int Kind { get; set; } // kind : 1 이면 Image 2 이면 HyperLink
         public String Title { get; set; }

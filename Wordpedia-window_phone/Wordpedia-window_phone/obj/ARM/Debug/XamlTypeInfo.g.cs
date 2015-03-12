@@ -124,29 +124,31 @@ namespace Wordpedia_window_phone.Wordpedia_window_phone_XamlTypeInfo
 
         private void InitTypeTables()
         {
-            _typeNameTable = new string[10];
+            _typeNameTable = new string[11];
             _typeNameTable[0] = "Windows.UI.Text.FontWeight";
             _typeNameTable[1] = "System.ValueType";
             _typeNameTable[2] = "Object";
             _typeNameTable[3] = "Wordpedia_window_phone.Library";
             _typeNameTable[4] = "Windows.UI.Xaml.Controls.Page";
             _typeNameTable[5] = "Windows.UI.Xaml.Controls.UserControl";
-            _typeNameTable[6] = "Wordpedia_window_phone.MainPage";
-            _typeNameTable[7] = "Wordpedia_window_phone.CreateVocabulary";
-            _typeNameTable[8] = "Wordpedia_window_phone.URLParsePage";
-            _typeNameTable[9] = "Wordpedia_window_phone.Vocabulary";
+            _typeNameTable[6] = "Wordpedia_window_phone.Login";
+            _typeNameTable[7] = "Wordpedia_window_phone.MainPage";
+            _typeNameTable[8] = "Wordpedia_window_phone.CreateVocabulary";
+            _typeNameTable[9] = "Wordpedia_window_phone.URLParsePage";
+            _typeNameTable[10] = "Wordpedia_window_phone.Vocabulary";
 
-            _typeTable = new global::System.Type[10];
+            _typeTable = new global::System.Type[11];
             _typeTable[0] = typeof(global::Windows.UI.Text.FontWeight);
             _typeTable[1] = typeof(global::System.ValueType);
             _typeTable[2] = typeof(global::System.Object);
             _typeTable[3] = typeof(global::Wordpedia_window_phone.Library);
             _typeTable[4] = typeof(global::Windows.UI.Xaml.Controls.Page);
             _typeTable[5] = typeof(global::Windows.UI.Xaml.Controls.UserControl);
-            _typeTable[6] = typeof(global::Wordpedia_window_phone.MainPage);
-            _typeTable[7] = typeof(global::Wordpedia_window_phone.CreateVocabulary);
-            _typeTable[8] = typeof(global::Wordpedia_window_phone.URLParsePage);
-            _typeTable[9] = typeof(global::Wordpedia_window_phone.Vocabulary);
+            _typeTable[6] = typeof(global::Wordpedia_window_phone.Login);
+            _typeTable[7] = typeof(global::Wordpedia_window_phone.MainPage);
+            _typeTable[8] = typeof(global::Wordpedia_window_phone.CreateVocabulary);
+            _typeTable[9] = typeof(global::Wordpedia_window_phone.URLParsePage);
+            _typeTable[10] = typeof(global::Wordpedia_window_phone.Vocabulary);
         }
 
         private int LookupTypeIndexByName(string typeName)
@@ -182,10 +184,11 @@ namespace Wordpedia_window_phone.Wordpedia_window_phone_XamlTypeInfo
         }
 
         private object Activate_3_Library() { return new global::Wordpedia_window_phone.Library(); }
-        private object Activate_6_MainPage() { return new global::Wordpedia_window_phone.MainPage(); }
-        private object Activate_7_CreateVocabulary() { return new global::Wordpedia_window_phone.CreateVocabulary(); }
-        private object Activate_8_URLParsePage() { return new global::Wordpedia_window_phone.URLParsePage(); }
-        private object Activate_9_Vocabulary() { return new global::Wordpedia_window_phone.Vocabulary(); }
+        private object Activate_6_Login() { return new global::Wordpedia_window_phone.Login(); }
+        private object Activate_7_MainPage() { return new global::Wordpedia_window_phone.MainPage(); }
+        private object Activate_8_CreateVocabulary() { return new global::Wordpedia_window_phone.CreateVocabulary(); }
+        private object Activate_9_URLParsePage() { return new global::Wordpedia_window_phone.URLParsePage(); }
+        private object Activate_10_Vocabulary() { return new global::Wordpedia_window_phone.Vocabulary(); }
 
         private global::Windows.UI.Xaml.Markup.IXamlType CreateXamlType(int typeIndex)
         {
@@ -226,30 +229,37 @@ namespace Wordpedia_window_phone.Wordpedia_window_phone_XamlTypeInfo
                 xamlType = new global::Wordpedia_window_phone.Wordpedia_window_phone_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 6:   //  Wordpedia_window_phone.MainPage
+            case 6:   //  Wordpedia_window_phone.Login
                 userType = new global::Wordpedia_window_phone.Wordpedia_window_phone_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_6_MainPage;
+                userType.Activator = Activate_6_Login;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 7:   //  Wordpedia_window_phone.CreateVocabulary
+            case 7:   //  Wordpedia_window_phone.MainPage
                 userType = new global::Wordpedia_window_phone.Wordpedia_window_phone_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_7_CreateVocabulary;
+                userType.Activator = Activate_7_MainPage;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 8:   //  Wordpedia_window_phone.URLParsePage
+            case 8:   //  Wordpedia_window_phone.CreateVocabulary
                 userType = new global::Wordpedia_window_phone.Wordpedia_window_phone_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_8_URLParsePage;
+                userType.Activator = Activate_8_CreateVocabulary;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 9:   //  Wordpedia_window_phone.Vocabulary
+            case 9:   //  Wordpedia_window_phone.URLParsePage
                 userType = new global::Wordpedia_window_phone.Wordpedia_window_phone_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_9_Vocabulary;
+                userType.Activator = Activate_9_URLParsePage;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 10:   //  Wordpedia_window_phone.Vocabulary
+                userType = new global::Wordpedia_window_phone.Wordpedia_window_phone_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
+                userType.Activator = Activate_10_Vocabulary;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
@@ -587,5 +597,7 @@ namespace Wordpedia_window_phone.Wordpedia_window_phone_XamlTypeInfo
         }
     }
 }
+
+
 
 

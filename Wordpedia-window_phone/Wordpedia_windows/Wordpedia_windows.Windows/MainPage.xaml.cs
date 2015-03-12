@@ -13,6 +13,8 @@ using Windows.ApplicationModel.DataTransfer;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Graphics.Display;
+using Windows.Graphics.Imaging;
+using Windows.Storage;
 using Windows.Storage.FileProperties;
 using Windows.Storage.Streams;
 using Windows.UI.Popups;
@@ -40,9 +42,11 @@ namespace Wordpedia_windows
         private List<vocaData> voca_list;
         private navigation_item prev_navItem;
         private String[] words;
+        private vocaData temp_v;
         private WriteableBitmap bitmap;
         private bool isLogin = false;
         private userData _userData;
+        private IRandomAccessStream writeBitmapStream;
 
 
         public MainPage()
@@ -148,6 +152,8 @@ namespace Wordpedia_windows
                         break;
                     case 4:
                         if (isLogin == false) break;
+                        ChangeGridVisibility(Grid_Surf, Visibility.Visible, true);
+                        btn_surf_Click(new object(), e);
                         break;
                 }
                 prev_navItem = v.Copy();
@@ -160,6 +166,7 @@ namespace Wordpedia_windows
             {
                 Grid_UserEmail.Visibility = Visibility.Collapsed;
                 Grid_Library.Visibility = Visibility.Collapsed;
+                Grid_Surf.Visibility = Visibility.Collapsed;
 
                 Grid_UserEmail_LoginRegist.Visibility = Visibility.Collapsed;
                 Grid_UserEmail_isLogin.Visibility = Visibility.Collapsed;
@@ -342,29 +349,6 @@ namespace Wordpedia_windows
 
             }
         }
-        private async void createVocabulrary()
-        {
-
-            string url = "http://wordpedia.herokuapp.com/collection/create?";
-            System.Net.WebRequest request = WebRequest.Create(url);
-            request.Method = "POST";
-            Windows.Storage.ApplicationDataContainer localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
-            request.Headers["token"] = localSettings.Values["token"].ToString();
-
-            try
-            {
-                WebResponse response = await request.GetResponseAsync();
-                using (Stream stream = response.GetResponseStream())
-                {
-                    StreamReader reader = new StreamReader(stream, Encoding.UTF8);
-                    String responseString = reader.ReadToEnd();
-                }
-            }
-            catch (Exception)
-            {
-            }
-        }
-
         private void tbx_loginregist_ID_TextChanged(object sender, TextChangedEventArgs e)
         {
         }
@@ -381,7 +365,7 @@ namespace Wordpedia_windows
                     temp_voca.Add(v);
             lv_voca.ItemsSource = temp_voca;
         }
-        private void lv_voca_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void lv_voca_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (lv_voca.SelectedItems.Count == 0) return;
             vocaData v = lv_voca.SelectedItems[0] as vocaData;
@@ -399,6 +383,15 @@ namespace Wordpedia_windows
                     temp_list.Add(w);
 
             lv_Library_word.ItemsSource = temp_list;
+
+            /*StorageFolder storageFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
+            StorageFile sampleFile = await storageFolder.GetFileAsync(v.id.ToString() + ".file");
+            var stream = await sampleFile.OpenAsync(Windows.Storage.FileAccessMode.ReadWrite);
+            
+            BitmapImage bitmap = new BitmapImage();
+            bitmap.SetSource(stream);
+            img_Library_Article.Source = bitmap;*/
+
         }
         private async void btn_capture_Click(object sender, RoutedEventArgs e)
         {
@@ -423,11 +416,12 @@ namespace Wordpedia_windows
                         BitmapImage bitmapImage = new BitmapImage();
                         bitmapImage.SetSource(imageStream);
 
-                        IRandomAccessStream writeBitmapStream = await imageReceived.OpenReadAsync();
+                        writeBitmapStream = await imageReceived.OpenReadAsync();
                         bitmap = new WriteableBitmap(
                             bitmapImage.PixelWidth, bitmapImage.PixelHeight);
                         bitmap.SetSource(writeBitmapStream);
 
+                        writeBitmapStream = await imageReceived.OpenReadAsync();
                         ChangeGridVisibility(Grid_Library_list, Visibility.Collapsed);
                         ChangeGridVisibility(Grid_Library_createVoca, Visibility.Visible);
 
@@ -446,7 +440,7 @@ namespace Wordpedia_windows
         /////////////////////Create Vocabulary//////////////////
         private async void btn_create_vocabulary_Click(object sender, RoutedEventArgs e)
         {
-
+            WriteableBitmap temp_bitmap = bitmap;
             OcrLanguage olc = (OcrLanguage)Enum.Parse(typeof(OcrLanguage), cbx_createVoca_ocrlanguage.SelectedItem as String);
             OcrEngine ocrEngine = new OcrEngine(olc);
             var ocrResult = await ocrEngine.RecognizeAsync(
@@ -475,15 +469,76 @@ namespace Wordpedia_windows
                 String[] separators = { "," };
                 words = transArticle.Split(separators, StringSplitOptions.RemoveEmptyEntries);
 
-                if (words[0] != null)
-                {
-                    ChangeGridVisibility(Grid_Library_list, Visibility.Collapsed);
-                    ChangeGridVisibility(Grid_Library_createVoca, Visibility.Visible);
-                }
-                else
+                if (words[0] == null)
                 {
                     var dialog = new MessageDialog("No Vocabulary in Article", "ERROR");
                     await dialog.ShowAsync();
+                    ChangeGridVisibility(Grid_Library_list, Visibility.Visible);
+                    ChangeGridVisibility(Grid_Library_createVoca, Visibility.Collapsed);
+                }
+                else
+                {
+
+                    String title = tbx_createVoca_title.Text;
+                    String to = LanguageCode.getLanguageCode()[cbx_createVoca_language.SelectedIndex];
+                    List<String> fixed_words = new List<String>();
+                    foreach (String v in words)
+                    {
+                        if (v.Length < 2) continue;
+                        bool flag = false;
+                        foreach (String w in fixed_words)
+                            if (v.Equals(w) == true)
+                                flag = true;
+                        if (flag == false)
+                            fixed_words.Add(v);
+                    }
+                    String query = fixed_words[0];
+                    for (int i = 1; i < fixed_words.Count; i++)
+                    {
+                        query += "&w=" + fixed_words[i];
+                    }
+
+                    Windows.Storage.ApplicationDataContainer localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+
+                    string url = "http://wordpedia.herokuapp.com/collection/create?title=" + title + "&to=" + to + "&w=" + query;
+                    WebRequest request = WebRequest.Create(url);
+                    request.Method = "POST";
+                    request.Headers["token"] = localSettings.Values["token"].ToString();
+                    try
+                    {
+                        WebResponse response = await request.GetResponseAsync();
+                        using (Stream stream = response.GetResponseStream())
+                        {
+                            StreamReader reader = new StreamReader(stream, Encoding.UTF8);
+                            String responseString = reader.ReadToEnd();
+                            Dictionary<string, string> jsonArray =
+                                JsonConvert.DeserializeObject<Dictionary<string, string>>(responseString);
+                            String state;
+                            if (jsonArray["requestCode"].Equals("1"))
+                            {
+                                state = "SUCCESS";
+                                tbx_createVoca_title.Text = "";
+
+
+                                StorageFolder folder = Windows.Storage.ApplicationData.Current.LocalFolder;
+                                StorageFile file = await folder.CreateFileAsync(jsonArray["collectionId"].ToString() + ".file");
+                                var streams = await file.OpenAsync(FileAccessMode.ReadWrite);
+
+                                loadLibraryList();
+                                ChangeGridVisibility(Grid_Library_createVoca, Visibility.Collapsed);
+                                ChangeGridVisibility(Grid_Library_list, Visibility.Visible);
+                            }
+                            else
+                            {
+                                state = "ERROR";
+                            }
+                            MessageDialog msg = new MessageDialog(jsonArray["requestMessage"], state);
+                            await msg.ShowAsync();
+                        }
+                    }
+                    catch (Exception)
+                    {
+                    }
                 }
             }
             else
@@ -491,61 +546,6 @@ namespace Wordpedia_windows
                 ///////////No Vocabulary/////////////
                 var dialog = new MessageDialog("No Vocabulary in Picture", "ERROR");
                 await dialog.ShowAsync();
-            }
-            String title = tbx_createVoca_title.Text;
-            String to = LanguageCode.getLanguageCode()[cbx_createVoca_language.SelectedIndex];
-            List<String> fixed_words = new List<String>();
-            foreach(String v in words)
-            {
-                if (v.Length < 2) continue;
-                bool flag = false;
-                foreach(String w in fixed_words)
-                    if( v.Equals(w) == true)
-                        flag = true;
-                if (flag == false)
-                    fixed_words.Add(v);
-            }
-            String query = fixed_words[0];
-            for(int i = 1 ;i<fixed_words.Count ; i++)
-            {
-                query += "&w=" + fixed_words[i];
-            }
-
-            Windows.Storage.ApplicationDataContainer localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
-
-            string url = "http://wordpedia.herokuapp.com/collection/create?title=" + title + "&to=" + to + "&w=" + query;
-            WebRequest request = WebRequest.Create(url);
-            request.Method = "POST";
-            request.Headers["token"] = localSettings.Values["token"].ToString();
-            try
-            {
-                WebResponse response = await request.GetResponseAsync();
-                using (Stream stream = response.GetResponseStream())
-                {
-                    StreamReader reader = new StreamReader(stream, Encoding.UTF8);
-                    String responseString = reader.ReadToEnd();
-                    Dictionary<string, string> jsonArray =
-                        JsonConvert.DeserializeObject<Dictionary<string, string>>(responseString);
-                    String state;
-                    if (jsonArray["requestCode"].Equals("1"))
-                    {
-                        state = "SUCCESS";
-                        tbx_createVoca_title.Text = "";
-
-                        loadLibraryList();
-                        ChangeGridVisibility(Grid_Library_createVoca, Visibility.Collapsed);
-                        ChangeGridVisibility(Grid_Library_list, Visibility.Visible);
-                    }
-                    else
-                    {
-                        state = "ERROR";
-                    }
-                    MessageDialog msg = new MessageDialog(jsonArray["requestMessage"], state);
-                    await msg.ShowAsync();
-                }
-            }
-            catch (Exception)
-            {
             }
         }
         private void cbx_createVoca_language_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -564,6 +564,87 @@ namespace Wordpedia_windows
 
             lv_Library_word.SelectedItem = null;
         }
+        public async Task SaveStreamAsync(IRandomAccessStream streamToSave, StorageFile destination)
+        {
+        }
 
+        private async void btn_copy_Click(object sender, RoutedEventArgs e)
+        {
+
+            string url = "http://wordpedia.herokuapp.com/collection/copy?collectionId=" + temp_v.id;
+            System.Net.WebRequest request = WebRequest.Create(url);
+            request.Method = "POST";
+            Windows.Storage.ApplicationDataContainer localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+            request.Headers["token"] = localSettings.Values["token"].ToString();
+
+            try
+            {
+                WebResponse response = await request.GetResponseAsync();
+                using (Stream stream = response.GetResponseStream())
+                {
+                    StreamReader reader = new StreamReader(stream, Encoding.UTF8);
+                    String responseString = reader.ReadToEnd();
+
+                    Dictionary<string, string> jsonArray =
+                        JsonConvert.DeserializeObject<Dictionary<string, string>>(responseString);
+                    if (jsonArray["requestCode"].ToString() == "1")
+                    {
+                        MessageDialog msg = new MessageDialog(jsonArray["requestMessage"].ToString(), "Success");
+                        await msg.ShowAsync();
+                    }
+                    else
+                    {
+                        MessageDialog msg = new MessageDialog(jsonArray["requestMessage"].ToString(), "Error");
+                        await msg.ShowAsync();
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        private async void btn_surf_Click(object sender, RoutedEventArgs e)
+        {
+
+            string url = "http://wordpedia.herokuapp.com/surf";
+            System.Net.WebRequest request = WebRequest.Create(url);
+            request.Method = "POST";
+            Windows.Storage.ApplicationDataContainer localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+            request.Headers["token"] = localSettings.Values["token"].ToString();
+
+            try
+            {
+                WebResponse response = await request.GetResponseAsync();
+                using (Stream stream = response.GetResponseStream())
+                {
+                    StreamReader reader = new StreamReader(stream, Encoding.UTF8);
+                    String responseString = reader.ReadToEnd();
+                    temp_v =
+                        JsonConvert.DeserializeObject<vocaData>(responseString);
+
+                    tb_Library_title.Text = temp_v.title;
+                    tb_Library_createDate.Text = temp_v.createDate;
+                    tb_Library_translate.Text = temp_v.fullTranslate;
+                    tbx_surf_creator.Text = "Creator : " + temp_v.creator;
+
+                    List<Word> temp_list = new List<Word>();
+                    foreach (Word w in temp_v.wordList)
+                        if (!w.translateWord.Equals(w.word))
+                            temp_list.Add(w);
+
+                    lv_Library_word.ItemsSource = temp_list;
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+
+
+            ChangeGridVisibility(Grid_Library, Visibility.Visible);
+            ChangeGridVisibility(Grid_Library_voca, Visibility.Visible);
+        }
     }
 }

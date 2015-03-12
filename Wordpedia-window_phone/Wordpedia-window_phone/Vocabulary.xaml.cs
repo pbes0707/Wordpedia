@@ -39,14 +39,13 @@ namespace Wordpedia_window_phone
 
         private void initialize(vocaData t)
         {
-            tb_Title.Text = t.Title;
-            tb_Article.Text = t.Article;
+            tb_Title.Text = t.title;
 
-            var show_list = new List<wordData>();
-            foreach(wordData v in t.Words)
+            var show_list = new List<Word>();
+            foreach (Word v in t.wordList)
             {
-                if( v.TranslateWord != "" 
-                    && v.Word != v.TranslateWord)
+                if( v.word != "" 
+                    && v.word != v.translateWord)
                 {
                     show_list.Add(v);
                 }
@@ -77,12 +76,14 @@ namespace Wordpedia_window_phone
         private void lv_words_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (lv_words.SelectedItems.Count == 0) return;
-            wordData v = lv_words.SelectedItems[0] as wordData;
+            Word v = lv_words.SelectedItems[0] as Word;
 
             ////////////////Google TTS API//////////////////
             String mp3Url = "http://translate.google.com/translate_tts?tl=en&q=";
-            mp3Url += v.Word;
+            mp3Url += v.word;
             media.Source = new Uri(mp3Url);
+
+            lv_words.SelectedItem = null;
         }
 
         private void media_MediaEnded(object sender, RoutedEventArgs e)

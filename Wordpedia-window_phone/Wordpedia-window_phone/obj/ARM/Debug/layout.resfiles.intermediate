@@ -1,12 +1,17 @@
 Assets\adad.jpg
 Assets\back.png
 Assets\BadgeLogo.scale-240.png
+Assets\BG.png
+Assets\Email icon.png
+Assets\log_in.png
 Assets\Logo.scale-240.png
 Assets\ocr.jpg
+Assets\password_Email bar.png
 Assets\sample.jpg
 Assets\sample.png
 Assets\sample2.png
 Assets\sample3.png
+Assets\sign_in.png
 Assets\SmallLogo.scale-240.png
 Assets\SplashScreen.scale-100.png
 Assets\SplashScreen.scale-140.png
@@ -14,9 +19,11 @@ Assets\SplashScreen.scale-240.png
 Assets\Square71x71Logo.scale-240.png
 Assets\StoreLogo.scale-240.png
 Assets\WideLogo.scale-240.png
+Assets\Wordped!a.png
 App.xbf
 CreateVocabulary.xbf
 Library.xbf
+Login.xbf
 MainPage.xbf
 URLParsePage.xbf
 Vocabulary.xbf

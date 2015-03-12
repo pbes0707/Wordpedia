@@ -28,6 +28,7 @@ using WindowsPreview.Media.Ocr;
 using Windows.UI.Popups;
 using Windows.UI.Notifications;
 using Windows.Data.Xml.Dom;
+using System.Net;
 
 namespace Wordpedia_window_phone
 {
@@ -36,7 +37,8 @@ namespace Wordpedia_window_phone
         static public bool act_picture = false;
         private SQLiteConnection conn;
         private TransmitData transData;
-        private List<vocaData> vocalist;
+        private List<vocaData> voca_list;
+        private userData _userData;
 
         public Library()
         {
@@ -59,36 +61,37 @@ namespace Wordpedia_window_phone
                 conn.Close();
         }
 
-        private void initialize()
+        private async void initialize()
         {
             //////////////////////All Vocabulary Load/////////////////////////
             ////sqlite db 를 열어 SQLvocaData를 받아와 vocaData로 변환 뒤 list에 Add시킨다.////
 
-            vocalist = new List<vocaData>();
+            voca_list = new List<vocaData>();
 
-            string strConn = Path.Combine(Path.Combine(ApplicationData.Current.LocalFolder.Path, "Vocabulary.sqlite")); ;
+            string url = "http://wordpedia.herokuapp.com/get/collection/user";
+            System.Net.WebRequest request = WebRequest.Create(url);
+            request.Method = "POST";
+            Windows.Storage.ApplicationDataContainer localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+            request.Headers["token"] = localSettings.Values["token"].ToString();
 
-            conn = new SQLiteConnection(strConn);
-            conn.CreateTable<SQLvocaData>();
-            List<SQLvocaData> SQLvocalist = conn.Table<SQLvocaData>().ToList<SQLvocaData>();
-
-            foreach(SQLvocaData v in SQLvocalist)
+            try
             {
-                vocaData data = new vocaData()
+                WebResponse response = await request.GetResponseAsync();
+                using (Stream stream = response.GetResponseStream())
                 {
-                    Kind = v.Kind,
-                    Title = v.Title,
-                    Date = v.Date,
-                    Translate = v.Translate,
-                    Words = JsonConvert.DeserializeObject<List<wordData>>(v.JsonWords),
+                    StreamReader reader = new StreamReader(stream, Encoding.UTF8);
+                    String responseString = reader.ReadToEnd();
+                    _userData =
+                        JsonConvert.DeserializeObject<userData>(responseString);
+                    voca_list = _userData.collections;
+                }
+            }
+            catch (Exception)
+            {
 
-                    Path = v.Path,
-                    Article = v.Article,
-                };
-                vocalist.Add(data);
             }
 
-            lv_Voca.ItemsSource = vocalist;
+            lv_Voca.ItemsSource = _userData.collections;
         }
 
         private void lv_CollectionList_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -206,10 +209,10 @@ namespace Wordpedia_window_phone
             //////////////////Search ///////////////////
             String query = tb_search.Text;
             List<vocaData> search_vocalist = new List<vocaData>();
-            foreach (vocaData v in vocalist)
+            foreach (vocaData v in voca_list)
             {
-                if (v.Title.Contains(query)
-                    || v.Date.ToString().Contains(query))
+                if (v.title.Contains(query)
+                    || v.createDate.ToString().Contains(query))
                     search_vocalist.Add(v);
             }
 

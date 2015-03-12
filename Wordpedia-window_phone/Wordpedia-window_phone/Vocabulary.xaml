@@ -30,27 +30,26 @@
                    VerticalAlignment="Top"
                    Height="49" Width="380" FontSize="44"/>
         <Grid
-            Height="225" 
+            Height="101" 
             VerticalAlignment="Top"
             Background="#ffffff" Margin="0,124,0,0">
-            <ScrollViewer Name="ArticleScrollViewer">
+            <ScrollViewer Name="ArticleScrollViewer" Margin="0,0,0,137">
                 <TextBox x:Name="tb_Article"
                    HorizontalAlignment="Left"
-                   Height="225" Width="390"
+                   Height="88" Width="390"
                    FontSize="20"
                    TextWrapping="Wrap" 
                    VerticalAlignment="Top"
                    Foreground="Black" IsReadOnly="True"
                          ScrollViewer.VerticalScrollMode="Enabled"
-                         SelectionHighlightColor="White"
-                         Margin="5,0,0,0"/>
+                         SelectionHighlightColor="White"/>
             </ScrollViewer>
         </Grid>
         <ListView 
             x:Name="lv_words"
-            Margin="0,360,0,0" 
+            Margin="0,230,0,0" 
             VerticalAlignment="Top"
-            Height="270" SelectionChanged="lv_words_SelectionChanged">
+            Height="400" SelectionChanged="lv_words_SelectionChanged">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid Height="70" Margin="0">
@@ -66,20 +65,17 @@
                             Height="70">
                             <TextBlock 
                                 Name="tb_word"
-                                Text="{Binding Word}" 
-                                FontSize="20"
+                                Text="{Binding word}" 
+                                FontSize="25"
                                 TextWrapping="NoWrap" />
                             <TextBlock
                                 Name="tb_translateword"
-                                Text="{Binding TranslateWord}"
+                                FontSize="19"
+                                Text="{Binding translateWord}"
                                 TextWrapping="NoWrap" />
-                            <TextBlock
-                                Name="tb_count"
-                                Text="{Binding Count}"
-                                MaxHeight="40" />
 
                         </StackPanel>
-                            
+
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

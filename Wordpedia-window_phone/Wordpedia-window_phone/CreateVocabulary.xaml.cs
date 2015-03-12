@@ -21,6 +21,8 @@ using Windows.Web.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Text.RegularExpressions;
+using System.Net;
+using Windows.UI.Popups;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -28,8 +30,8 @@ namespace Wordpedia_window_phone
 {
     public sealed partial class CreateVocabulary : Page
     {
-        private SQLiteConnection conn;
         private TransmitData data;
+        private String[] words;
 
         public CreateVocabulary()
         {
@@ -45,117 +47,115 @@ namespace Wordpedia_window_phone
         }
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            if (conn != null)
-                conn.Close();
         }
 
         private async Task Process(String article)
         {
             ////////////////////////////String Split/////////////////////////////
             String transArticle = article.ToLower();
+            /*Regex regex = new Regex("<[^>]*>", RegexOptions.IgnoreCase);
+            String result = regex.Replace(htmlContent, "");
+            result = result.Replace("\n", "");*/
             transArticle = Regex.Replace(transArticle, @"[^a-zA-Z0-9가-힣]", ",", RegexOptions.IgnoreCase);
             String[] separators = { "," };
-            String[] words = transArticle.Split(separators, StringSplitOptions.RemoveEmptyEntries);
-            
-            if(words.Length == 0)
+            words = transArticle.Split(separators, StringSplitOptions.RemoveEmptyEntries);
+
+
+            String title = new Random().Next(0, 10000).ToString();
+            String to = "ko";
+            List<String> fixed_words = new List<String>();
+            foreach (String v in words)
+            {
+                if (v.Length < 2) continue;
+                bool flag = false;
+                foreach (String w in fixed_words)
+                    if (v.Equals(w) == true)
+                        flag = true;
+                if (flag == false)
+                    fixed_words.Add(v);
+            }
+            String query = fixed_words[0];
+            for (int i = 1; i < fixed_words.Count; i++)
+            {
+                query += "&w=" + fixed_words[i];
+            }
+
+
+            if(words[0] == null)
             {
                 this.Frame.Navigate(typeof(Library));
                 return;
             }
 
+            Windows.Storage.ApplicationDataContainer localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
 
-            ///////////////////////////List Create////////////////////////////////
-            List<wordData> wordList = new List<wordData>();
-            foreach (string v in words)
-            {
-                bool _flag = false;
-                if (wordList.Count != 0)
-                {
-                    foreach (wordData c in wordList)
-                    {
-                        if (c.Word == v)
-                        {
-                            c.Count++;
-                            _flag = true;
-                            break;
-                        }
-                    }
-                }
-                if (_flag == false || wordList.Count == 0)
-                    wordList.Add(new wordData(v, v));
-            }
-            /////////////////////Word Translate Request to Server/////////////
-            String url = "http://wordpedia.herokuapp.com/translate/v2/ko?";
-            foreach(wordData v in wordList)
-            {
-                if (wordList[0] != v)
-                    url += "&";
-                url += "w=" + v.Word;
-            }
-            Uri strUri = new Uri(url);
-            String ResponseString = "";
+            string url = "http://wordpedia.herokuapp.com/collection/create?title=" + title + "&to=" + to + "&w=" + query;
+            WebRequest request = WebRequest.Create(url);
+            request.Method = "POST";
+            request.Headers["token"] = localSettings.Values["token"].ToString();
             try
             {
-                HttpClient httpClient = new HttpClient();
-                httpClient.DefaultRequestHeaders.Accept.TryParseAdd("application/json");
-                ResponseString = await httpClient.GetStringAsync(strUri);
-            }
-            catch(Exception ex)
-            {
-            }
-            Dictionary<string, string> jsonArray = JsonConvert.DeserializeObject<Dictionary<string, string>>(ResponseString);
-            foreach(KeyValuePair<string, string> v in jsonArray)
-            {
-                foreach(wordData c in wordList)
+                WebResponse response = await request.GetResponseAsync();
+                using (Stream stream = response.GetResponseStream())
                 {
-                    if (c.Word == v.Key)
-                        c.TranslateWord = v.Value;
+                    StreamReader reader = new StreamReader(stream, Encoding.UTF8);
+                    String responseString = reader.ReadToEnd();
+                    Dictionary<string, string> jsonArray =
+                        JsonConvert.DeserializeObject<Dictionary<string, string>>(responseString);
+                    String state;
+                    if (jsonArray["requestCode"].Equals("1"))
+                    {
+                        state = "SUCCESS";
+
+                        StorageFolder folder = Windows.Storage.ApplicationData.Current.LocalFolder;
+                        StorageFile file = await folder.CreateFileAsync(jsonArray["collectionId"].ToString() + ".file");
+                        var streams = await file.OpenAsync(FileAccessMode.ReadWrite);
+
+                        //////////////////단어장 하나 받아와서 Vocabulary 열기///////////////////
+                        {
+                            string url2 = "http://wordpedia.herokuapp.com/get/collection?collectionId="+jsonArray["collectionId"].ToString();
+                            WebRequest request2 = WebRequest.Create(url2);
+                            request2.Method = "POST";
+                            request2.Headers["token"] = localSettings.Values["token"].ToString();
+                            try
+                            {
+                                WebResponse response2 = await request2.GetResponseAsync();
+                                using (Stream stream2 = response2.GetResponseStream())
+                                {
+                                    StreamReader reader2 = new StreamReader(stream2, Encoding.UTF8);
+                                    String responseString2 = reader2.ReadToEnd();
+                                    vocaData jsonArray2 =
+                                        JsonConvert.DeserializeObject<vocaData>(responseString2);
+                                    String state2;
+                                    if (jsonArray2.id.ToString().Equals(jsonArray["collectionId"]))
+                                    {
+                                        state2 = "SUCCESS";
+                                        this.Frame.Navigate(typeof(Vocabulary), jsonArray2);
+                                    }
+                                    else
+                                    {
+                                        state2 = "ERROR";
+                                    }
+                                    //MessageDialog msg = new MessageDialog(jsonArray2["requestMessage"], state2);
+                                    //await msg.ShowAsync();
+                                }
+                            }
+                            catch (Exception)
+                            {
+                            }
+                        }
+                    }
+                    else
+                    {
+                        state = "ERROR";
+                    }
+                    MessageDialog msg2 = new MessageDialog(jsonArray["requestMessage"], state);
+                    await msg2.ShowAsync();
                 }
             }
-            //////////////////////Voca Data Create//////////////////////////
-            ///////////Kind  1 : Image            2 : HyperLink/////////////
-            ///////////Path  1 : Image local Path 2 : HyperLink address/////
-            int substring_length = 15;
-            if (article.Length < 15)
-                substring_length = article.Length;
-            vocaData vocadata = new vocaData()
+            catch (Exception)
             {
-                Kind = data.Spec,
-                Title = article.Substring(0, substring_length),
-                Date = DateTime.Now,
-                Translate = "en-kr",
-                Words = wordList,
-
-                Path = data.Path,
-                Article = article,
-            };
-            ////////////////// vocaData -> SQLvocaData ///////////////////
-
-            string json = JsonConvert.SerializeObject(vocadata.Words);
-            SQLvocaData sqlvocadata = new SQLvocaData()
-            {
-                Kind = vocadata.Kind,
-                Title = vocadata.Title,
-                Date = vocadata.Date,
-                Translate = vocadata.Translate,
-                JsonWords = json,
-
-                Path = vocadata.Path,
-                Article = vocadata.Article,
-            };
-
-            ///////////////////SQLite DB 에 저장한다.//////////////////////
-
-            string strConn = Path.Combine(Path.Combine(ApplicationData.Current.LocalFolder.Path, "Vocabulary.sqlite")); ;
-
-            conn = new SQLiteConnection(strConn);
-            conn.CreateTable<SQLvocaData>();
-            List<SQLvocaData> retrievedTasks = conn.Table<SQLvocaData>().ToList<SQLvocaData>();
-            conn.Insert(sqlvocadata);
-
-            conn.Close();
-
-            this.Frame.Navigate(typeof(Vocabulary), vocadata);
+            }
         }
     }
 

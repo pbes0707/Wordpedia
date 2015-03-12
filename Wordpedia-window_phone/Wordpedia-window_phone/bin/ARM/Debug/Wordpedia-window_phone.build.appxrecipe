@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <Machine>BILLBIRD</Machine>
-    <WindowsUser>john</WindowsUser>
+    <Machine>JOHN-PC</Machine>
+    <WindowsUser>John</WindowsUser>
     <TargetPlatformIdentifier>WindowsPhoneApp</TargetPlatformIdentifier>
     <SolutionConfiguration>Debug|ARM</SolutionConfiguration>
     <PackageArchitecture>arm</PackageArchitecture>
@@ -37,7 +37,7 @@
     <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\packages\Microsoft.Windows.Ocr.1.0.0\build\wpa81\\..\..\lib\wpa81\ARM\WindowsPreview.Media.Ocr.winmd">
       <PackagePath>WindowsPreview.Media.Ocr.winmd</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\WindowsPhoneApp\v8.1\ExtensionSDKs\SQLite.WP81\3.8.8.1\Redist\Debug\ARM\sqlite3.dll">
+    <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\WindowsPhoneApp\v8.1\ExtensionSDKs\SQLite.WP81\3.8.8.3\Redist\Debug\ARM\sqlite3.dll">
       <PackagePath>sqlite3.dll</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\Assets\back.png">
@@ -47,9 +47,21 @@
       <PackagePath>Assets\BadgeLogo.scale-240.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\Assets\BG.png">
+      <PackagePath>Assets\BG.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\Assets\Email icon.png">
+      <PackagePath>Assets\Email icon.png</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\Assets\Logo.scale-240.png">
       <PackagePath>Assets\Logo.scale-240.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\Assets\log_in.png">
+      <PackagePath>Assets\log_in.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\Assets\password_Email bar.png">
+      <PackagePath>Assets\password_Email bar.png</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\Assets\sample.png">
       <PackagePath>Assets\sample.png</PackagePath>
@@ -59,6 +71,9 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\Assets\sample3.png">
       <PackagePath>Assets\sample3.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\Assets\sign_in.png">
+      <PackagePath>Assets\sign_in.png</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\Assets\SmallLogo.scale-240.png">
       <PackagePath>Assets\SmallLogo.scale-240.png</PackagePath>
@@ -88,6 +103,9 @@
       <PackagePath>Assets\WideLogo.scale-240.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\Assets\Wordped!a.png">
+      <PackagePath>Assets\Wordped!a.png</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\Assets\ocr.jpg">
       <PackagePath>Assets\ocr.jpg</PackagePath>
     </AppxPackagedFile>
@@ -105,6 +123,9 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\bin\ARM\Debug\Library.xbf">
       <PackagePath>Library.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\bin\ARM\Debug\Login.xbf">
+      <PackagePath>Login.xbf</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\bin\ARM\Debug\MainPage.xbf">
       <PackagePath>MainPage.xbf</PackagePath>

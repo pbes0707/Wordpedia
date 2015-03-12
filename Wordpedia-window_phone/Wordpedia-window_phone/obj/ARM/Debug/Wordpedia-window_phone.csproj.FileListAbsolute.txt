@@ -64,3 +64,8 @@ C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\obj\ARM\Debug\CreateV
 C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\obj\ARM\Debug\URLParsePage.xbf
 C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\obj\ARM\Debug\Vocabulary.xaml
 C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\obj\ARM\Debug\Vocabulary.xbf
+C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\bin\ARM\Debug\Login.xbf
+C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\obj\ARM\Debug\Login.g.i.cs
+C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\obj\ARM\Debug\Login.g.cs
+C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\obj\ARM\Debug\Login.xaml
+C:\Wordpedia\Wordpedia-window_phone\Wordpedia-window_phone\obj\ARM\Debug\Login.xbf

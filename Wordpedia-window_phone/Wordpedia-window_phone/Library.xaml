@@ -129,7 +129,7 @@
                             Height="110">
                             <TextBlock 
                                 Name="thumbnail"
-                                Text="{Binding Kind}" FontSize="48" TextAlignment="Center" Foreground="#FF3F0505"/>
+                                Text="{Binding id}" FontSize="48" TextAlignment="Center" Foreground="#FF3F0505"/>
                         </Border>
                         <StackPanel 
                             Grid.Column="1" 
@@ -138,17 +138,17 @@
                             Margin="10, 0, 0, 0">
                             <TextBlock 
                                 Name="tb_title"
-                                Text="{Binding Title}" 
+                                Text="{Binding title}" 
                                 Style="{StaticResource TitleTextBlockStyle}" 
                                 TextWrapping="NoWrap" />
                             <TextBlock
                                 Name="tb_date"
-                                Text="{Binding Date}"
+                                Text="{Binding createDate}"
                                 Style="{StaticResource BodyTextBlockStyle}"
                                 TextWrapping="NoWrap" />
                             <TextBlock
                                 Name="tb_translate"
-                                Text="{Binding Translate}"
+                                Text="{Binding fullTranslate}"
                                 Style="{StaticResource BodyTextBlockStyle}"
                                 MaxHeight="60" />
 
