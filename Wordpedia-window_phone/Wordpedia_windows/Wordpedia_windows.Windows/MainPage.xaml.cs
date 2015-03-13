@@ -193,7 +193,7 @@ namespace Wordpedia_windows
             }
         }
 
-        ///////////////Regist//////////////////
+        ////////////////////////Regist////////////////////////
         private void btn_loginregist_signin_Click(object sender, RoutedEventArgs e)
         {
             registFunction(tbx_loginregist_ID.Text, tbx_loginregist_passwd.Password);
@@ -322,7 +322,7 @@ namespace Wordpedia_windows
         }
 
 
-        ///////////////Library////////////////////
+        //////////////////////Library//////////////////////////////
         private async void loadLibraryList()
         {
             string url = "http://wordpedia.herokuapp.com/get/collection/user";
@@ -437,7 +437,7 @@ namespace Wordpedia_windows
         }
 
 
-        /////////////////////Create Vocabulary//////////////////
+        /////////////////////Create Vocabulary//////////////////////
         private async void btn_create_vocabulary_Click(object sender, RoutedEventArgs e)
         {
             WriteableBitmap temp_bitmap = bitmap;
@@ -552,7 +552,6 @@ namespace Wordpedia_windows
         {
 
         }
-
         private void lv_Library_word_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (lv_Library_word.SelectedItems.Count == 0) return;
@@ -567,7 +566,6 @@ namespace Wordpedia_windows
         public async Task SaveStreamAsync(IRandomAccessStream streamToSave, StorageFile destination)
         {
         }
-
         private async void btn_copy_Click(object sender, RoutedEventArgs e)
         {
 
@@ -604,7 +602,6 @@ namespace Wordpedia_windows
 
             }
         }
-
         private async void btn_surf_Click(object sender, RoutedEventArgs e)
         {
 

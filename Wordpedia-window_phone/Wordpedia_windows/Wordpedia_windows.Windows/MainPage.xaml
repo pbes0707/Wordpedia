@@ -197,7 +197,7 @@
                 <ComboBox x:Name="cbx_createVoca_ocrlanguage" ItemsSource="{Binding Language}" FontSize="30"  Margin="437,324,305,383" SelectionChanged="cbx_createVoca_language_SelectionChanged"/>
             </Grid>
         </Grid>
-        <Grid Name="Grid_Surf" Visibility="Visible"
+        <Grid Name="Grid_Surf" Visibility="Collapsed"
             HorizontalAlignment="Left"
               Height="768" VerticalAlignment="Top" Width="1066" Margin="300,0,0,0">
             <Button Name="btn_surf" Content="Surf" HorizontalAlignment="Left" Margin="7,677,0,0"
